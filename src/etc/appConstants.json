@@ -1,0 +1,5 @@
+{
+	"backendEndpoint": "http://localhost:8080/",
+	"workspaceFilter": "SAP",
+	"environmentFilter": "TEST"
+}

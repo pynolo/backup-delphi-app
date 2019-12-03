@@ -1,14 +1,17 @@
-import React from 'react'
-import './App.css'
-import TasktriggerTaskList from './components/TasktriggerTaskList'
-import taskArray from "./viewalltasks"
+import React from "react";
+import "./App.css";
+import TasktriggerTaskList from "./components/TasktriggerTaskList";
+import appConstants from "./etc/appConstants";
+import taskArray from "./viewalltasks";
 
-function App() {
-	return (
-		<div className="App">
-			<TasktriggerTaskList taskArray={taskArray} />
-		</div>
-	)
+class App extends React.Component {
+	render() {
+		return (
+			<div className='App'>
+				<TasktriggerTaskList taskArray={taskArray} constants={appConstants} />
+			</div>
+		);
+	}
 }
 
-export default App
+export default App;

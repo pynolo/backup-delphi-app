@@ -1,16 +1,29 @@
-import React from "react"
-import TasktriggerTask from "./TasktriggerTask"
+import React from "react";
+import TasktriggerTask from "./TasktriggerTask";
 
 function TasktriggerTaskList(props) {
-	console.log(props.taskArray)
-	const taskComponents = props.taskArray.map(task => <TasktriggerTask key={task.id} task={task} />)
-	console.log(taskComponents);
-	
+	const taskComponents = props.taskArray.map(task => (
+		<TasktriggerTask key={task.id} task={task} constants={props.constants} />
+	));
+
 	return (
-		<div>
-			{taskComponents}
-		</div>
-	)
+		<table>
+			<thead>
+				<tr>
+					<td>
+						<b>Job</b>
+					</td>
+					<td>
+						<b>Workspace</b>
+					</td>
+					<td>
+						<b>Environment</b>
+					</td>
+				</tr>
+			</thead>
+			<tbody>{taskComponents}</tbody>
+		</table>
+	);
 }
 
-export default TasktriggerTaskList
+export default TasktriggerTaskList;

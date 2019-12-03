@@ -1,17 +1,33 @@
-import React from "react"
+import React from "react";
 
-function TasktriggerTask(props) {
-  return (
-		<div>
-			<ul>
-				<li>{props.task.name}</li>
-				<li>{props.task.executable}</li>
-				<li>{props.task.description}</li>
-				<li>{props.task.workspaceName}</li>
-				<li>{props.task.environmentName}</li>
-			</ul>
-		</div>
-	)
+class TasktriggerTask extends React.Component {
+	render() {
+		let row = "";
+		if (
+			this.props.constants.environmentFilter == this.props.task.environmentName
+		) {
+			row = (
+				<tr>
+					<td>
+						<a href={this.props.constants.backendEndpoint}>
+							{this.props.task.name}
+						</a>
+					</td>
+					<td>{this.props.task.workspaceName}</td>
+					<td>{this.props.task.environmentName}</td>
+					<td>
+						<button
+							onClick={() => {
+								console.log("puppa");
+							}}>
+							Esegui
+						</button>
+					</td>
+				</tr>
+			);
+		}
+		return row;
+	}
 }
 
-export default TasktriggerTask
+export default TasktriggerTask;
