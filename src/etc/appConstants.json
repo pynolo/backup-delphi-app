@@ -1,5 +1,8 @@
 {
-	"backendEndpoint": "http://localhost:8080/",
 	"workspaceFilter": "SAP",
-	"environmentFilter": "TEST"
+	"environmentFilter": "TEST",
+	"apiEndpoint": "http://localhost:8080",
+	"apiLaunchTaskupdater": "/api/launchtaskupdater",
+	"apiLaunchExecution": "/api/launchexecution",
+	"apiFindExecution": "/api/findexecution"
 }
