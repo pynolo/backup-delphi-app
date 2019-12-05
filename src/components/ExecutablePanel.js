@@ -15,7 +15,7 @@ class ExecutablePanel extends React.Component {
 		let taskEndpoint =
 			this.props.constants.apiEndpoint +
 			this.props.constants.apiLaunchExecution;
-		var bodyObj = { executable: this.props.executable };
+		let bodyObj = { executable: this.props.executable };
 		fetch(taskEndpoint, {
 			method: "POST",
 			headers: {
@@ -35,11 +35,11 @@ class ExecutablePanel extends React.Component {
 	}
 
 	render() {
-		let row = this.state.status;
+		let row = "loading";
 		if (this.state.status === "waiting") {
-			row = (
-				<button onClick={this.runTask}>Esegui {this.props.executable}</button>
-			);
+			row = <button onClick={this.runTask}>Esegui</button>;
+		} else {
+			row = <div>Esecuzione lanciata: {this.state.response.executionId}</div>;
 		}
 		return row;
 	}
