@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./App.css";
+// MATERIAL UI docs https://material.io/components/
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 //import injectTapEventPlugin from "react-tap-event-plugin";
 import TasktriggerTaskList from "./components/TasktriggerTaskList";

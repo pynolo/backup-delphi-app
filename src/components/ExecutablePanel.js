@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 
 class ExecutablePanel extends React.Component {
 	constructor() {
@@ -36,7 +37,11 @@ class ExecutablePanel extends React.Component {
 	render() {
 		let row = "loading";
 		if (this.state.status === "waiting") {
-			row = <button onClick={this.runTask}>Esegui</button>;
+			row = (
+				<Button onClick={this.runTask} variant='contained' color='primary'>
+					Esegui
+				</Button>
+			);
 		} else {
 			row = <div>Esecuzione lanciata: {this.state.response.executionId}</div>;
 		}

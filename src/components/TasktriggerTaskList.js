@@ -58,13 +58,13 @@ class TasktriggerTaskList extends React.Component {
 				<thead>
 					<tr>
 						<td>
-							<b>Job</b>
+							<h3>Job</h3>
 						</td>
 						<td>
-							<b>Workspace</b>
+							<h3>Area</h3>
 						</td>
 						<td>
-							<b>Environment</b>
+							<h3>Stato</h3>
 						</td>
 					</tr>
 				</thead>
