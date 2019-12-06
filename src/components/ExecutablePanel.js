@@ -13,8 +13,7 @@ class ExecutablePanel extends React.Component {
 
 	runTask() {
 		let taskEndpoint =
-			this.props.constants.apiEndpoint +
-			this.props.constants.apiLaunchExecution;
+			this.props.constants.apiEndpoint + this.props.constants.apiExecuteById;
 		let bodyObj = { executable: this.props.executable };
 		fetch(taskEndpoint, {
 			method: "POST",

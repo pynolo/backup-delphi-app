@@ -2,44 +2,42 @@ import React from "react";
 import TasktriggerTask from "./TasktriggerTask";
 
 class TasktriggerTaskList extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			status: "waiting",
 			response: null,
 			taskComponents: null
 		};
 
-		this.runTask = this.runTask.bind(this);
-		this.processData = this.processData.bind(this);
-		this.runTask();
+		this.loadData = this.loadData.bind(this);
+		this.formatData = this.formatData.bind(this);
+		this.loadData();
 	}
 
-	runTask() {
+	loadData() {
 		let taskEndpoint =
-			this.props.constants.apiEndpoint +
-			this.props.constants.apiLaunchTaskupdater;
+			this.props.constants.apiEndpoint + this.props.constants.apiViewAllTasks;
 		fetch(taskEndpoint, {
-			method: "POST",
+			method: "GET",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json"
-			},
-			body: ""
+			}
 		})
 			.then(res => res.json())
 			.then(data => {
 				this.setState({
-					status: "running ",
+					status: "running",
 					taskArray: data,
 					taskComponents: null
 				});
-				this.processData();
+				this.formatData();
 			})
 			.catch(console.log);
 	}
 
-	processData() {
+	formatData() {
 		var taskComponents = this.state.taskArray.map(task => (
 			<TasktriggerTask
 				key={task.id}
