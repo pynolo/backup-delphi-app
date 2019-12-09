@@ -12,16 +12,16 @@ class TasktriggerTask extends React.Component {
 			row = (
 				<tr>
 					<td>
-						<b>{this.props.task.name}</b>
-					</td>
-					<td>
-						{this.props.task.workspaceName} {this.props.task.environmentName}
-					</td>
-					<td>
 						<ExecutablePanel
 							executable={this.props.task.executable}
 							constants={this.props.constants}
 						/>
+					</td>
+					<td>
+						<b>{this.props.task.name}</b>
+					</td>
+					<td>
+						{this.props.task.workspaceName} {this.props.task.environmentName}
 					</td>
 				</tr>
 			);

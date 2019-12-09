@@ -1,9 +1,11 @@
 import React from "react";
+// Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import "./App.css";
-// MATERIAL UI docs https://material.io/components/
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-//import injectTapEventPlugin from "react-tap-event-plugin";
 import TasktriggerTaskList from "./components/TasktriggerTaskList";
 //import LoginForm from "./components/LoginForm";
 import appConstants from "./etc/appConstants";
@@ -36,18 +38,21 @@ class App extends React.Component {
 		//		if (this.state.user === null) {
 		//			out = (
 		//				<div className='App'>
-		//					<MuiThemeProvider>
 		//						<LoginForm user={this.state.user} constants={appConstants} />
-		//					</MuiThemeProvider>
 		//				</div>
 		//			);
 		//		} else {
 		out = (
-			<div className='App'>
-				<MuiThemeProvider>
-					<TasktriggerTaskList constants={appConstants} />
-				</MuiThemeProvider>
-			</div>
+			<Container>
+				<Row>
+					<Col sm={1}>&nbsp;</Col>
+					<Col md='auto'>
+						<div className='App'>
+							<TasktriggerTaskList constants={appConstants} />
+						</div>
+					</Col>
+				</Row>
+			</Container>
 		);
 		//		}
 		return out;

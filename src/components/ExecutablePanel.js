@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import Button from "react-bootstrap/Button";
 
 class ExecutablePanel extends React.Component {
 	constructor() {
@@ -38,7 +38,7 @@ class ExecutablePanel extends React.Component {
 		let row = "loading";
 		if (this.state.status === "waiting") {
 			row = (
-				<Button onClick={this.runTask} variant='contained' color='primary'>
+				<Button onClick={this.runTask} variant='primary' size='sm'>
 					Esegui
 				</Button>
 			);
