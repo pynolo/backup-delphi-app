@@ -1,0 +1,10 @@
+{
+	"workspaceFilter": "SAP",
+	"environmentFilter": "TEST",
+	"apiEndpoint": "http://astest.intranet.giunti.it:81/delphi-server",
+	"apiViewAllTasks": "/api/viewalltasks",
+	"apiUpdateTasks": "/api/updatetasks",
+	"apiExecuteById": "/api/executebyid",
+	"apiExecuteByName": "/api/executebyname",
+	"apiFindExecution": "/api/findexecution"
+}

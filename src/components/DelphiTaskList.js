@@ -1,7 +1,7 @@
 import React from "react";
-import TasktriggerTask from "./TasktriggerTask";
+import DelphiTask from "./DelphiTask";
 
-class TasktriggerTaskList extends React.Component {
+class DelphiTaskList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -39,11 +39,7 @@ class TasktriggerTaskList extends React.Component {
 
 	formatData() {
 		var taskComponents = this.state.taskArray.map(task => (
-			<TasktriggerTask
-				key={task.id}
-				task={task}
-				constants={this.props.constants}
-			/>
+			<DelphiTask key={task.id} task={task} constants={this.props.constants} />
 		));
 		this.setState({
 			status: "running",
@@ -74,4 +70,4 @@ class TasktriggerTaskList extends React.Component {
 	}
 }
 
-export default TasktriggerTaskList;
+export default DelphiTaskList;

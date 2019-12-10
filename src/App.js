@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import "./App.css";
-import TasktriggerTaskList from "./components/TasktriggerTaskList";
+import DelphiTaskList from "./components/DelphiTaskList";
 //import LoginForm from "./components/LoginForm";
 import appConstants from "./etc/appConstants";
 
@@ -48,7 +48,7 @@ class App extends React.Component {
 					<Col sm={1}>&nbsp;</Col>
 					<Col md='auto'>
 						<div className='App'>
-							<TasktriggerTaskList constants={appConstants} />
+							<DelphiTaskList constants={appConstants} />
 						</div>
 					</Col>
 				</Row>

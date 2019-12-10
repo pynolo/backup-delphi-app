@@ -1,7 +1,7 @@
 import React from "react";
 import ExecutablePanel from "./ExecutablePanel";
 
-class TasktriggerTask extends React.Component {
+class DelphiTask extends React.Component {
 	render() {
 		let row = "";
 		if (
@@ -32,4 +32,4 @@ class TasktriggerTask extends React.Component {
 	}
 }
 
-export default TasktriggerTask;
+export default DelphiTask;
