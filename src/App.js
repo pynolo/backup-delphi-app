@@ -1,13 +1,11 @@
 import React from "react";
-// Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import IndexPage from "./pages/IndexPage";
+import TaskListPage from "./pages/TaskListPage";
+import LoginPage from "./pages/LoginPage";
 
 import "./App.css";
-import DelphiTaskList from "./components/DelphiTaskList";
-//import LoginForm from "./components/LoginForm";
 import appConstants from "./etc/appConstants";
 
 class App extends React.Component {
@@ -34,27 +32,20 @@ class App extends React.Component {
 	}
 
 	render() {
-		let out = "Loading app...";
-		//		if (this.state.user === null) {
-		//			out = (
-		//				<div className='App'>
-		//						<LoginForm user={this.state.user} constants={appConstants} />
-		//				</div>
-		//			);
-		//		} else {
-		out = (
-			<Container>
-				<Row>
-					<Col sm={1}>&nbsp;</Col>
-					<Col md='auto'>
-						<div className='App'>
-							<DelphiTaskList constants={appConstants} />
-						</div>
-					</Col>
-				</Row>
-			</Container>
+		let out = (
+			<div className='App'>
+				<BrowserRouter>
+					<Switch>
+						<Route
+							path='/tasklist'
+							render={props => <TaskListPage {...props} />}
+						/>
+						<Route path='/login' render={props => <LoginPage {...props} />} />
+						<Route path='/' render={props => <IndexPage {...props} />} />
+					</Switch>
+				</BrowserRouter>
+			</div>
 		);
-		//		}
 		return out;
 	}
 }
