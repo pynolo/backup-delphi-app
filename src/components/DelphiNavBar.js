@@ -6,7 +6,7 @@ import logo from "../img/pythia.png";
 function DelphiNavBar() {
   return (
     <Navbar bg='primary' variant='dark' expand='sm'>
-      <Navbar.Brand href='#home'>
+      <Navbar.Brand href='/'>
         <img
           src={logo}
           width='50'
