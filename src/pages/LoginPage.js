@@ -1,37 +1,23 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import Login from "../components/Login";
 
 class LoginPage extends React.Component {
-  constructor() {
-    super();
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {}
-
   render() {
-    let out = (
-      <Form>
-        <Form.Group controlId='formUsername'>
-          <Form.Label>Nome utente</Form.Label>
-          <Form.Control type='username' placeholder='n.cognome' />
-          <Form.Text className='text-muted'>
-            Il tuo nome utente nella rete Giunti
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group controlId='formPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control type='password' placeholder='password' />
-        </Form.Group>
-        <Button variant='primary' type='submit'>
-          Submit
-        </Button>
-      </Form>
+    return (
+      <Container>
+        <Row>
+          <Col lg={4}>&nbsp;</Col>
+          <Col lg={4}>
+            <Login />
+          </Col>
+          <Col lg={4}>&nbsp;</Col>
+        </Row>
+      </Container>
     );
-    return out;
   }
 }
 

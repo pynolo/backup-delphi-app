@@ -14,7 +14,6 @@ import appConstants from "./etc/appConstants";
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { user: null };
 
     this.updateTasks = this.updateTasks.bind(this);
     this.updateTasks();

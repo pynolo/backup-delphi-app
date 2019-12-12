@@ -5,7 +5,7 @@ import logo from "../img/pythia.png";
 
 function DelphiNavBar() {
   return (
-    <Navbar bg='primary' variant='dark' expand='lg'>
+    <Navbar bg='primary' variant='dark' expand='sm'>
       <Navbar.Brand href='#home'>
         <img
           src={logo}
@@ -20,6 +20,7 @@ function DelphiNavBar() {
         <Nav.Link href='/tasklist'>Elenco task</Nav.Link>
         <Nav.Link href='/filters'>Filtri</Nav.Link>
         <Nav.Link href='/users'>Utenti</Nav.Link>
+        <Nav.Link href='/login'>Login</Nav.Link>
       </Nav>
     </Navbar>
   );
