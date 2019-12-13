@@ -2,7 +2,7 @@
   "name": "giunti-delphi-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/delphi",
+  "homepage": "/",
   "dependencies": {
     "@material-ui/core": "^4.7.1",
     "bootstrap": "^4.4.1",

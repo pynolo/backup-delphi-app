@@ -1,9 +1,11 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 
+import ExecutionStatus from "./ExecutionStatus";
+
 class ExecutablePanel extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       status: "waiting",
       response: null
@@ -16,6 +18,8 @@ class ExecutablePanel extends React.Component {
     let taskEndpoint =
       this.props.constants.apiEndpoint +
       this.props.constants.apiExecuteById +
+      "/" +
+      this.props.type +
       "/" +
       this.props.executable;
     fetch(taskEndpoint, {
@@ -44,7 +48,13 @@ class ExecutablePanel extends React.Component {
         </Button>
       );
     } else {
-      row = <div>Esecuzione lanciata: {this.state.response.executionId}</div>;
+      row = (
+        <ExecutionStatus
+          executionId={this.state.response.executionId}
+          type={this.props.type}
+          constants={this.props.constants}
+        />
+      );
     }
     return row;
   }

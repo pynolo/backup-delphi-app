@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
+
 import ExecutablePanel from "./ExecutablePanel";
 
 class DelphiTask extends React.Component {
@@ -9,17 +11,29 @@ class DelphiTask extends React.Component {
         this.props.task.environmentName &&
       this.props.constants.workspaceFilter === this.props.task.workspaceName
     ) {
+      let type = "";
+      if (this.props.task.type === "plan") {
+        type = (
+          <Button variant='outline-info' size='sm'>
+            PLAN
+          </Button>
+        );
+      }
       row = (
         <tr>
           <td>
             <ExecutablePanel
               executable={this.props.task.executable}
+              type={this.props.task.type}
               constants={this.props.constants}
             />
             &nbsp;
           </td>
           <td>
-            <b>{this.props.task.name}</b>
+            <div className='font-weight-bold'>
+              {this.props.task.name}
+              {type}
+            </div>
           </td>
           <td>
             {this.props.task.workspaceName} {this.props.task.environmentName}
