@@ -4,8 +4,10 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
 import appConstants from "../etc/appConstants";
+import { setUsername } from "./LoginCookie";
+import { withRouter } from "react-router-dom";
 
-export default class Login extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,8 +69,9 @@ export default class Login extends Component {
       password: password,
       loginErrors: ""
     });
-    console.log("login effettuato");
-    //TODO
+    setUsername(username);
+    console.log("login effettuato: " + username);
+    this.props.history.push("/tasklist");
   }
 
   render() {
@@ -85,7 +88,6 @@ export default class Login extends Component {
           <Form.Control
             type='username'
             name='username'
-            placeholder='n.cognome'
             onChange={this.handleChange}
             required
           />
@@ -99,7 +101,6 @@ export default class Login extends Component {
           <Form.Control
             type='password'
             name='password'
-            placeholder='password'
             onChange={this.handleChange}
             required
           />
@@ -113,3 +114,5 @@ export default class Login extends Component {
     return out;
   }
 }
+
+export default withRouter(LoginForm);
