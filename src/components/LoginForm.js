@@ -71,7 +71,8 @@ class LoginForm extends Component {
     });
     setUsername(username);
     console.log("login effettuato: " + username);
-    this.props.history.push("/tasklist");
+    /*this.props.history.push("/tasklist");*/
+    window.location.reload();
   }
 
   render() {

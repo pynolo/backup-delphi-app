@@ -44,21 +44,42 @@ class App extends React.Component {
   }
 
   render() {
+    let routeSwitch = "";
+    if (this.state.username != null) {
+      routeSwitch = (
+        <Switch>
+          <Redirect from='/login' to='/tasklist' />
+          <Route
+            path='/tasklist'
+            render={props => (
+              <TaskListPage username={this.state.username} {...props} />
+            )}
+          />
+          <Route
+            path='/filters'
+            render={props => (
+              <TaskListPage username={this.state.username} {...props} />
+            )}
+          />
+          <Route
+            path='/users'
+            render={props => (
+              <TaskListPage username={this.state.username} {...props} />
+            )}
+          />
+        </Switch>
+      );
+    } else {
+      routeSwitch = (
+        <Switch>
+          <Route path='/login' render={props => <LoginPage {...props} />} />
+          <Redirect from='*' to='/login' />
+        </Switch>
+      );
+    }
     let out = (
       <div className='App'>
-        <BrowserRouter>
-          <Switch>
-            <Route path='/login' render={props => <LoginPage {...props} />} />
-            if (this.state.username != null)
-            {
-              <Route
-                path='/tasklist'
-                render={props => <TaskListPage {...props} />}
-              />
-            }
-            else {<Redirect from='*' to='/login' />}
-          </Switch>
-        </BrowserRouter>
+        <BrowserRouter>{routeSwitch}</BrowserRouter>
       </div>
     );
     return out;
