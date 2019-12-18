@@ -3,8 +3,9 @@ import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import TaskListPage from "./pages/TaskListPage";
 import LoginPage from "./pages/LoginPage";
+import TaskListPage from "./pages/TaskListPage";
+import UserListPage from "./pages/UserListPage";
 import { getUsername } from "./components/LoginCookie";
 
 import "./App.css";
@@ -56,13 +57,13 @@ class App extends React.Component {
             )}
           />
           <Route
-            path='/filters'
+            path='/userlist'
             render={props => (
-              <TaskListPage username={this.state.username} {...props} />
+              <UserListPage username={this.state.username} {...props} />
             )}
           />
           <Route
-            path='/users'
+            path='/filters'
             render={props => (
               <TaskListPage username={this.state.username} {...props} />
             )}

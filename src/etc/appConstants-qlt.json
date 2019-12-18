@@ -6,5 +6,12 @@
 	"apiViewAllTasks": "/api/viewalltasks",
 	"apiUpdateTasks": "/api/updatetasks",
 	"apiExecuteById": "/api/executebyid",
-	"apiFindExecution": "/api/findexecution"
+	"apiFindExecution": "/api/findexecution",
+	"apiCreateUser": "/api/createuser",
+	"apiChangeUser": "/api/changeuser",
+	"apiRemoveUser": "/api/removeuser",
+	"apiViewAllUsers": "/api/viewallusers",
+	"apiViewUserTask": "/api/viewusertask",
+	"apiBindUserTask": "/api/bindusertask",
+	"apiUnbindUserTask": "/api/unbindusertask"
 }

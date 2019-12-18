@@ -54,9 +54,13 @@ class LoginForm extends Component {
     })
       .then(res => res.json())
       .then(restData => {
-        this.handleLogin(restData);
+        if (restData.status >= 400) {
+          this.handleError("Autenticazione non riuscita");
+        } else {
+          this.handleLogin(restData);
+        }
       })
-      .catch(errors => {
+      .catch(error => {
         this.handleError("Autenticazione non riuscita");
       });
     event.preventDefault();

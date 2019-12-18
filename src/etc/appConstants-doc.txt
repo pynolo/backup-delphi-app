@@ -1,0 +1,12 @@
+"/api/authenticate", //POST
+"/api/viewalltasks", //GET + GET/{username} per filtro utente
+"/api/updatetasks", //POST
+"/api/executebyid", //GET/{type}/{executable}
+"/api/findexecution", //GET/{type}/{executable}
+"/api/createuser", //POST
+"/api/changeuser", //PUT
+"/api/removeuser", //DEL/{username}
+"/api/viewallusers", //GET
+"/api/viewusertask", //GET/{username}/{executable}
+"/api/bindusertask", //POST
+"/api/unbindusertask" //POST
