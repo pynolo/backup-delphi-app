@@ -11,8 +11,6 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
       loginErrors: ""
     };
 
@@ -30,19 +28,15 @@ class LoginForm extends Component {
 
   handleError(errorDescription) {
     this.setState({
-      username: "",
-      password: "",
       loginErrors: errorDescription
     });
   }
 
   handleSubmit(event) {
-    const { username, password } = this.state;
-
     let loginEndpoint = appConstants.apiEndpoint + appConstants.apiAuthenticate;
     let bodyObj = {
-      username: username,
-      password: password
+      username: event.target.elements.formUsername.value,
+      password: event.target.elements.formPassword.value
     };
     fetch(loginEndpoint, {
       method: "POST",
@@ -57,7 +51,7 @@ class LoginForm extends Component {
         if (restData.status >= 400) {
           this.handleError("Autenticazione non riuscita");
         } else {
-          this.handleLogin(restData);
+          this.handleLogin(bodyObj);
         }
       })
       .catch(error => {
@@ -66,11 +60,9 @@ class LoginForm extends Component {
     event.preventDefault();
   }
 
-  handleLogin(restData) {
-    const { username, password } = this.state;
+  handleLogin(bodyObj) {
+    const { username } = bodyObj;
     this.setState({
-      username: username,
-      password: password,
       loginErrors: ""
     });
     setUsername(username);
