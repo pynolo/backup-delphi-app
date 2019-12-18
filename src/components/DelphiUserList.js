@@ -67,8 +67,8 @@ class DelphiUserList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <DelphiUserCreate />
           {this.state.userComponents}
+          <DelphiUserCreate constants={this.props.constants} />
         </tbody>
       </table>
     );

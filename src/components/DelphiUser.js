@@ -13,7 +13,7 @@ class DelphiUser extends React.Component {
       this.props.constants.apiEndpoint +
       this.props.constants.apiRemoveUser +
       "/" +
-      this.props.username;
+      this.props.user.username;
     fetch(taskEndpoint, {
       method: "DELETE",
       headers: {
