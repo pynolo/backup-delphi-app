@@ -1,6 +1,7 @@
 import React from "react";
 import DelphiUser from "./DelphiUser";
 import DelphiUserCreate from "./DelphiUserCreate";
+import { getUsername } from "./LoginCookie";
 
 class DelphiUserList extends React.Component {
   constructor(props) {
@@ -39,10 +40,12 @@ class DelphiUserList extends React.Component {
   }
 
   formatData() {
+    let username = getUsername();
     var userComponents = this.state.userArray.map(user => (
       <DelphiUser
         key={user.username}
         user={user}
+        username={username}
         constants={this.props.constants}
       />
     ));

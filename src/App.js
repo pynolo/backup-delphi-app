@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import TaskListPage from "./pages/TaskListPage";
 import UserListPage from "./pages/UserListPage";
+import MatchListPage from "./pages/MatchListPage";
 import { getUsername } from "./components/LoginCookie";
 
 import "./App.css";
@@ -63,9 +64,9 @@ class App extends React.Component {
             )}
           />
           <Route
-            path='/filters'
+            path='/matchlist'
             render={props => (
-              <TaskListPage username={this.state.username} {...props} />
+              <MatchListPage username={this.state.username} {...props} />
             )}
           />
         </Switch>

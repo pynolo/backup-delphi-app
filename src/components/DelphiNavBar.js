@@ -32,12 +32,13 @@ class DelphiNavBar extends React.Component {
       menuItems = (
         <Nav className='mr-auto'>
           <Nav.Link href='/tasklist'>Elenco task</Nav.Link>
+          <Nav.Link href='/matchlist'>Visibilità</Nav.Link>
           <Nav.Link href='/userlist'>Utenti</Nav.Link>
           <Nav.Link href='/#' onClick={this.logout}>
             Logout {this.state.username}
           </Nav.Link>
         </Nav>
-      ); /*<Nav.Link href='/filters'>Filtri</Nav.Link>*/
+      );
     }
     return (
       <Navbar bg='primary' variant='dark' expand='sm'>
