@@ -19,8 +19,10 @@ class DelphiMatchList extends React.Component {
     this.formatTaskArray = this.formatTaskArray.bind(this);
     this.formatUserArray = this.formatUserArray.bind(this);
     this.selectUsername = this.selectUsername.bind(this);
+  }
+
+  componentDidMount() {
     this.loadUserArray();
-    this.loadTaskArray();
   }
 
   loadUserArray() {
@@ -39,19 +41,24 @@ class DelphiMatchList extends React.Component {
           this.setState({ errorMessage: "Connessione non riuscita" });
         } else {
           this.setState({ userArray: restData });
+          //set first selectedUsername
+          if (this.state.selectedUsername == null) {
+            if (this.state.userArray != null) {
+              if (this.state.userArray.length > 0) {
+                this.setState({
+                  selectedUsername: this.state.userArray[0].username
+                });
+              }
+            }
+          }
+          //continue loading tasks
+          this.loadTaskArray();
         }
       })
       .catch(this.setState({ errorMessage: "Connessione non riuscita" }));
   }
 
   formatUserArray() {
-    if (this.state.selectedUsername == null) {
-      if (this.state.userArray != null) {
-        if (this.state.userArray.size > 0) {
-          this.setState({ selectUsername: this.state.userArray[0].username });
-        }
-      }
-    }
     return (
       <div className='row'>
         <div className='col-sm-2'>
@@ -64,13 +71,10 @@ class DelphiMatchList extends React.Component {
             onLoad={this.selectUsername}
             name='role'
             size='sm'
+            value={this.state.selectedUsername}
             required>
             {this.state.userArray.map(user => (
-              <option
-                key={user.username}
-                selected={user.username === this.state.selectedUsername}>
-                {user.username}
-              </option>
+              <option key={user.username}>{user.username}</option>
             ))}
           </Form.Control>
         </div>
@@ -104,7 +108,7 @@ class DelphiMatchList extends React.Component {
       <DelphiMatch
         key={task.id}
         task={task}
-        selectedUsername={this.state.selectUsername}
+        selectedUsername={this.state.selectedUsername}
         constants={this.props.constants}
       />
     ));
@@ -119,7 +123,11 @@ class DelphiMatchList extends React.Component {
 
   render() {
     var userSelect = "";
-    var taskList = "";
+    var taskList = (
+      <tr>
+        <td></td>
+      </tr>
+    );
     if (this.state.userArray != null) userSelect = this.formatUserArray();
     if (this.state.taskArray != null) taskList = this.formatTaskArray();
     return (

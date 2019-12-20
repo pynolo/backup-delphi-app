@@ -8,5 +8,4 @@
 "/api/removeuser", //DEL/{username}
 "/api/viewallusers", //GET
 "/api/viewusertask", //GET/{username}/{executable}
-"/api/bindusertask", //POST
-"/api/unbindusertask" //POST
+"/api/changeusertask" //POST

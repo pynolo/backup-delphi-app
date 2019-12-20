@@ -24,6 +24,9 @@ class App extends React.Component {
     };
     this.updateTasks = this.updateTasks.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
+  }
+
+  componentDidMount() {
     this.updateTasks();
   }
 
@@ -35,10 +38,19 @@ class App extends React.Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: "{}"
-    })
-      .then(res => res.json())
-      .catch(console.log);
+      body: "{nulla: niente}"
+    });
+    /*.then(res => res.json())
+      .then(restData => {
+        if (restData.status >= 400) {
+          this.setState({ errorMessage: "Aggiornamento task non riuscito" });
+        } else {
+          console.log("Task aggiornati correttamente da Talend verso Delphi");
+        }
+      })
+      .catch(
+        this.setState({ errorMessage: "Aggiornamento task non riuscito" })
+      );*/
   }
 
   refreshPage() {

@@ -5,11 +5,39 @@ export default class DelphiMatchCheckbox extends React.Component {
   constructor(props) {
     super(props);
 
-    this.value = false;
+    this.state = {
+      task: this.props.task,
+      selectedUsername: this.props.selectedUsername,
+      value: false
+    };
 
     this.loadValue = this.loadValue.bind(this);
     this.saveValue = this.saveValue.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      task: this.props.task,
+      selectedUsername: this.props.selectedUsername
+    });
     this.loadValue();
+  }
+
+  //Quando il padre aggiorna le props, questo statico restituisce
+  //un oggetto/argomento per setState()
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.task === prevState.task &&
+      nextProps.selectedUsername === prevState.selectedUsername
+    ) {
+      return null;
+    } else {
+      this.loadValue();
+      return {
+        task: nextProps.task,
+        selectedUsername: nextProps.selectedUsername
+      };
+    }
   }
 
   loadValue() {
@@ -17,9 +45,9 @@ export default class DelphiMatchCheckbox extends React.Component {
       this.props.constants.apiEndpoint +
       this.props.constants.apiViewUserTask +
       "/" +
-      this.props.selectedUsername +
+      this.state.selectedUsername +
       "/" +
-      this.props.task.executable;
+      this.state.task.executable;
     fetch(endpoint, {
       method: "GET",
       headers: {
@@ -29,29 +57,42 @@ export default class DelphiMatchCheckbox extends React.Component {
     })
       .then(res => res.json())
       .then(restData => {
-        console.log(
-          this.props.selectedUsername +
-            "/" +
-            this.props.task.executable +
-            ": " +
-            JSON.stringify(restData)
-        );
+        this.setState({
+          username: restData.username,
+          executable: restData.executable,
+          match: restData.match
+        });
+        console.log(endpoint + ": " + JSON.stringify(restData));
       })
-      .catch(error => {
-        console.log(
-          this.props.selectedUsername +
-            "/" +
-            this.props.task.executable +
-            ": Connessione non riuscita"
-        );
-      });
+      .catch(console.log(endpoint + ": Connessione non riuscita"));
   }
 
-  saveValue() {}
+  saveValue(event) {
+    let endpoint =
+      this.props.constants.apiEndpoint + this.props.constants.apiChangeUserTask;
+    let bodyObj = {
+      username: this.state.selectedUsername,
+      executable: this.state.task.executable,
+      match: event.target.value
+    };
+    fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bodyObj)
+    })
+      .then(res => res.json())
+      .then(restData => {
+        console.log(endpoint + ": match " + restData.match);
+      })
+      .catch(console.log(endpoint + ": Connessione non riuscita"));
+  }
 
   render() {
-    let description = this.props.task.name;
-    if (this.props.task.type === "plan") {
+    let description = this.state.task.name;
+    if (this.state.task.type === "plan") {
       description = description + " [PLAN]";
     }
     return (
@@ -59,7 +100,8 @@ export default class DelphiMatchCheckbox extends React.Component {
         type='checkbox'
         name='selected'
         label={description}
-        value={this.value}
+        value={this.state.value}
+        onChange={this.saveValue}
       />
     );
   }
