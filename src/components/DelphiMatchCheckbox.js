@@ -8,7 +8,7 @@ export default class DelphiMatchCheckbox extends React.Component {
     this.state = {
       task: this.props.task,
       selectedUsername: this.props.selectedUsername,
-      value: false
+      match: false
     };
 
     this.loadValue = this.loadValue.bind(this);
@@ -62,7 +62,6 @@ export default class DelphiMatchCheckbox extends React.Component {
           executable: restData.executable,
           match: restData.match
         });
-        console.log(endpoint + ": " + JSON.stringify(restData));
       })
       .catch(console.log(endpoint + ": Connessione non riuscita"));
   }
@@ -73,7 +72,7 @@ export default class DelphiMatchCheckbox extends React.Component {
     let bodyObj = {
       username: this.state.selectedUsername,
       executable: this.state.task.executable,
-      match: event.target.value
+      match: event.target.checked
     };
     fetch(endpoint, {
       method: "POST",
@@ -85,7 +84,11 @@ export default class DelphiMatchCheckbox extends React.Component {
     })
       .then(res => res.json())
       .then(restData => {
-        console.log(endpoint + ": match " + restData.match);
+        this.setState({
+          username: restData.username,
+          executable: restData.executable,
+          match: restData.match
+        });
       })
       .catch(console.log(endpoint + ": Connessione non riuscita"));
   }
@@ -98,9 +101,9 @@ export default class DelphiMatchCheckbox extends React.Component {
     return (
       <Form.Check
         type='checkbox'
-        name='selected'
+        name={this.state.executable}
         label={description}
-        value={this.state.value}
+        checked={this.state.match}
         onChange={this.saveValue}
       />
     );

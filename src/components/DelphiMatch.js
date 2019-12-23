@@ -1,5 +1,5 @@
 import React from "react";
-
+import ErrorBoundary from "../ErrorBoundary";
 import DelphiMatchCheckbox from "./DelphiMatchCheckbox";
 
 class DelphiMatch extends React.Component {
@@ -40,12 +40,14 @@ class DelphiMatch extends React.Component {
       row = (
         <tr>
           <td>
-            <DelphiMatchCheckbox
-              key={this.state.task.id}
-              selectedUsername={this.state.selectedUsername}
-              task={this.state.task}
-              constants={this.props.constants}
-            />
+            <ErrorBoundary>
+              <DelphiMatchCheckbox
+                key={this.state.task.id}
+                selectedUsername={this.state.selectedUsername}
+                task={this.state.task}
+                constants={this.props.constants}
+              />
+            </ErrorBoundary>
           </td>
         </tr>
       );

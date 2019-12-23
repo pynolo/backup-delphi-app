@@ -59,27 +59,29 @@ class DelphiMatchList extends React.Component {
   }
 
   formatUserArray() {
-    return (
-      <div className='row'>
-        <div className='col-sm-2'>
-          <Form.Label>Utente:</Form.Label>
+    if (this.state.selectedUsername !== null) {
+      return (
+        <div className='row'>
+          <div className='col-sm-2'>
+            <Form.Label>Utente:</Form.Label>
+          </div>
+          <div className='col-sm-10'>
+            <Form.Control
+              as='select'
+              onChange={this.selectUsername}
+              onLoad={this.selectUsername}
+              name='role'
+              size='sm'
+              value={this.state.selectedUsername}
+              required>
+              {this.state.userArray.map(user => (
+                <option key={user.username}>{user.username}</option>
+              ))}
+            </Form.Control>
+          </div>
         </div>
-        <div className='col-sm-10'>
-          <Form.Control
-            as='select'
-            onChange={this.selectUsername}
-            onLoad={this.selectUsername}
-            name='role'
-            size='sm'
-            value={this.state.selectedUsername}
-            required>
-            {this.state.userArray.map(user => (
-              <option key={user.username}>{user.username}</option>
-            ))}
-          </Form.Control>
-        </div>
-      </div>
-    );
+      );
+    } else return <div></div>;
   }
 
   loadTaskArray() {
