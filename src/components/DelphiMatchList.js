@@ -51,8 +51,6 @@ class DelphiMatchList extends React.Component {
               }
             }
           }
-          //continue loading tasks
-          this.loadTaskArray();
         }
       })
       .catch(this.setState({ errorMessage: "Connessione non riuscita" }));
@@ -121,6 +119,7 @@ class DelphiMatchList extends React.Component {
     this.setState({
       selectedUsername: event.target.value
     });
+    this.loadTaskArray();
   }
 
   render() {

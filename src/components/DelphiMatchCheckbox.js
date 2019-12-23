@@ -15,14 +15,6 @@ export default class DelphiMatchCheckbox extends React.Component {
     this.saveValue = this.saveValue.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
-      task: this.props.task,
-      selectedUsername: this.props.selectedUsername
-    });
-    this.loadValue();
-  }
-
   //Quando il padre aggiorna le props, questo statico restituisce
   //un oggetto/argomento per setState()
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -32,7 +24,6 @@ export default class DelphiMatchCheckbox extends React.Component {
     ) {
       return null;
     } else {
-      this.loadValue();
       return {
         task: nextProps.task,
         selectedUsername: nextProps.selectedUsername
@@ -40,30 +31,51 @@ export default class DelphiMatchCheckbox extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.loadValue();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.match === null) {
+      this.loadValue();
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.loadValue) {
+      this.loadValue.cancel();
+    }
+  }
+
   loadValue() {
-    let endpoint =
-      this.props.constants.apiEndpoint +
-      this.props.constants.apiViewUserTask +
-      "/" +
-      this.state.selectedUsername +
-      "/" +
-      this.state.task.executable;
-    fetch(endpoint, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(restData => {
-        this.setState({
-          username: restData.username,
-          executable: restData.executable,
-          match: restData.match
-        });
+    if (
+      this.state.selectedUsername !== null &&
+      this.state.task.executable !== null
+    ) {
+      let endpoint =
+        this.props.constants.apiEndpoint +
+        this.props.constants.apiViewUserTask +
+        "/" +
+        this.state.selectedUsername +
+        "/" +
+        this.state.task.executable;
+      fetch(endpoint, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
       })
-      .catch(console.log(endpoint + ": Connessione non riuscita"));
+        .then(res => res.json())
+        .then(restData => {
+          this.setState({
+            username: restData.username,
+            executable: restData.executable,
+            match: restData.match
+          });
+        });
+      //.catch(console.log(endpoint + ": Connessione non riuscita"));
+    }
   }
 
   saveValue(event) {
@@ -89,8 +101,8 @@ export default class DelphiMatchCheckbox extends React.Component {
           executable: restData.executable,
           match: restData.match
         });
-      })
-      .catch(console.log(endpoint + ": Connessione non riuscita"));
+      });
+    //.catch(console.log(endpoint + ": Connessione non riuscita"));
   }
 
   render() {
