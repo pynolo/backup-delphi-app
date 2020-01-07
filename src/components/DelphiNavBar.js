@@ -2,7 +2,12 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
-import { getUsername, removeUsername } from "./LoginCookie";
+import {
+  getUsername,
+  removeUsername,
+  getRole,
+  removeRole
+} from "./LoginCookie";
 import logo from "../img/pythia.png";
 
 class DelphiNavBar extends React.Component {
@@ -10,15 +15,20 @@ class DelphiNavBar extends React.Component {
     super(props);
 
     let usernameObj = getUsername();
+    let roleObj = getRole();
     let username = null;
     if (usernameObj != null) username = usernameObj.username;
+    let role = null;
+    if (roleObj != null) role = roleObj.role;
     this.state = {
-      username: username
+      username: username,
+      role: role
     };
   }
 
   logout() {
     removeUsername();
+    removeRole();
   }
 
   render() {
@@ -30,16 +40,27 @@ class DelphiNavBar extends React.Component {
         </Nav>
       );
     } else {
-      menuItems = (
-        <Nav className='mr-auto'>
-          <Nav.Link href='/tasklist'>Elenco task</Nav.Link>
-          <Nav.Link href='/matchlist'>Visibilità</Nav.Link>
-          <Nav.Link href='/userlist'>Utenti</Nav.Link>
-          <Nav.Link href='/#' onClick={this.logout}>
-            Logout {this.state.username}
-          </Nav.Link>
-        </Nav>
-      );
+      if (this.state.role === "admin") {
+        menuItems = (
+          <Nav className='mr-auto'>
+            <Nav.Link href='/tasklist'>Elenco task</Nav.Link>
+            <Nav.Link href='/matchlist'>Visibilità</Nav.Link>
+            <Nav.Link href='/userlist'>Utenti</Nav.Link>
+            <Nav.Link href='/#' onClick={this.logout}>
+              Logout {this.state.username}
+            </Nav.Link>
+          </Nav>
+        );
+      } else {
+        menuItems = (
+          <Nav className='mr-auto'>
+            <Nav.Link href='/tasklist'>Elenco task</Nav.Link>
+            <Nav.Link href='/#' onClick={this.logout}>
+              Logout {this.state.username}
+            </Nav.Link>
+          </Nav>
+        );
+      }
     }
     return (
       <Navbar bg='primary' variant='dark' expand='sm'>

@@ -5,6 +5,7 @@ import Alert from "react-bootstrap/Alert";
 
 import appConstants from "../etc/appConstants";
 import { setUsername } from "./LoginCookie";
+import { setRole } from "./LoginCookie";
 import { withRouter } from "react-router-dom";
 
 class LoginForm extends Component {
@@ -51,7 +52,7 @@ class LoginForm extends Component {
         if (restData.status >= 400) {
           this.handleError("Autenticazione non riuscita");
         } else {
-          this.handleLogin(bodyObj);
+          this.handleLogin(restData);
         }
       })
       .catch(error => {
@@ -60,13 +61,14 @@ class LoginForm extends Component {
     event.preventDefault();
   }
 
-  handleLogin(bodyObj) {
-    const { username } = bodyObj;
+  handleLogin(data) {
+    const { username, role } = data;
     this.setState({
       loginErrors: ""
     });
     setUsername(username);
-    console.log("login effettuato: " + username);
+    setRole(role);
+    console.log("login effettuato: " + username + " " + role);
     /*this.props.history.push("/tasklist");*/
     window.location.reload();
   }
