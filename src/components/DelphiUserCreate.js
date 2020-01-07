@@ -60,35 +60,31 @@ class DelphiUserCreate extends React.Component {
       }
     }
     let row = (
-      <tr>
-        <td colSpan='2'>
-          <Form onSubmit={this.handleSubmit}>
-            <div className='row'>
-              <div className='col-sm-1'>
-                <Button variant='warning' size='sm' type='submit'>
-                  Crea
-                </Button>
-              </div>
-              <div className='col-sm-2'>
-                <Form.Label size='sm'>Username:</Form.Label>
-              </div>
-              <div className='col-sm-4'>
-                <Form.Control name='username' size='sm' required />
-              </div>
-              <div className='col-sm-1'>
-                <Form.Label size='sm'>Ruolo:</Form.Label>
-              </div>
-              <div className='col-sm-4'>
-                <Form.Control as='select' name='role' size='sm' required>
-                  <option>user</option>
-                  <option>admin</option>
-                </Form.Control>
-              </div>
-            </div>
-            {warning}
-          </Form>
-        </td>
-      </tr>
+      <Form onSubmit={this.handleSubmit}>
+        <div className='row'>
+          <div className='col-sm-2'>
+            <Form.Label size='sm'>Username:</Form.Label>
+          </div>
+          <div className='col-sm-4'>
+            <Form.Control name='username' size='sm' required />
+          </div>
+          <div className='col-sm-1'>
+            <Form.Label size='sm'>Ruolo:</Form.Label>
+          </div>
+          <div className='col-sm-4'>
+            <Form.Control as='select' name='role' size='sm' required>
+              <option>user</option>
+              <option>admin</option>
+            </Form.Control>
+          </div>
+          <div className='col-sm-1'>
+            <Button variant='warning' size='sm' type='submit'>
+              Crea
+            </Button>
+          </div>
+        </div>
+        {warning}
+      </Form>
     );
     return row;
   }

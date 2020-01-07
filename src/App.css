@@ -10,3 +10,8 @@
   background-size: cover;
   background-image: url(img/delphi.png);
 }
+
+h3 {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}

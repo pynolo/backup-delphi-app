@@ -66,7 +66,7 @@ class DelphiNavBar extends React.Component {
     }
     return (
       <Navbar bg='primary' variant='dark' expand='sm'>
-        <Navbar.Brand href='/'>
+        <Navbar.Brand href='#'>
           <img
             src={logo}
             width='50'
@@ -75,7 +75,7 @@ class DelphiNavBar extends React.Component {
             alt='Giunti Delphi'
           />
         </Navbar.Brand>
-        <Navbar.Brand href='/'>Delphi</Navbar.Brand>
+        <Navbar.Brand href='#'>Delphi</Navbar.Brand>
         {menuItems}
       </Navbar>
     );

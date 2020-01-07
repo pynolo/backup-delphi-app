@@ -61,22 +61,28 @@ class DelphiUserList extends React.Component {
 
   render() {
     return (
-      <table>
-        <thead>
-          <tr>
-            <td>
-              <h3>&nbsp;</h3>
-            </td>
-            <td>
-              <h3>Utenti e ruoli</h3>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.userComponents}
-          <DelphiUserCreate constants={this.props.constants} />
-        </tbody>
-      </table>
+      <div>
+        <p></p>
+        <DelphiUserCreate constants={this.props.constants} />
+        <table>
+          <thead>
+            <tr>
+              <td>
+                <h3>&nbsp;</h3>
+              </td>
+              <td>
+                <h3>Utenti e ruoli</h3>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> </td>
+            </tr>
+            {this.state.userComponents}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
