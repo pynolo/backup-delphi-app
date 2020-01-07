@@ -1,6 +1,8 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 
+import appConstants from "../etc/appConstants";
+
 export default class DelphiMatchCheckbox extends React.Component {
   constructor(props) {
     super(props);
@@ -22,8 +24,10 @@ export default class DelphiMatchCheckbox extends React.Component {
       nextProps.task === prevState.task &&
       nextProps.selectedUsername === prevState.selectedUsername
     ) {
+      //console.log("getDerivedStateFromProps no change");
       return null;
     } else {
+      //console.log("getDerivedStateFromProps CHANGED");
       return {
         task: nextProps.task,
         selectedUsername: nextProps.selectedUsername
@@ -38,6 +42,10 @@ export default class DelphiMatchCheckbox extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.match === null) {
       this.loadValue();
+    } else {
+      if (prevState.selectedUsername !== this.state.selectedUsername) {
+        this.loadValue();
+      }
     }
   }
 
@@ -53,8 +61,8 @@ export default class DelphiMatchCheckbox extends React.Component {
       this.state.task.executable !== null
     ) {
       let endpoint =
-        this.props.constants.apiEndpoint +
-        this.props.constants.apiViewUserTask +
+        appConstants.apiEndpoint +
+        appConstants.apiViewUserTask +
         "/" +
         this.state.selectedUsername +
         "/" +
@@ -79,8 +87,7 @@ export default class DelphiMatchCheckbox extends React.Component {
   }
 
   saveValue(event) {
-    let endpoint =
-      this.props.constants.apiEndpoint + this.props.constants.apiChangeUserTask;
+    let endpoint = appConstants.apiEndpoint + appConstants.apiChangeUserTask;
     let bodyObj = {
       username: this.state.selectedUsername,
       executable: this.state.task.executable,

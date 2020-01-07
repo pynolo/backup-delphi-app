@@ -14,6 +14,9 @@ class DelphiUserList extends React.Component {
 
     this.loadData = this.loadData.bind(this);
     this.formatData = this.formatData.bind(this);
+  }
+
+  componentDidMount() {
     this.loadData();
   }
 

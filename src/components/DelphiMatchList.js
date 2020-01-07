@@ -1,90 +1,50 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 
 import DelphiMatch from "./DelphiMatch";
+
+import appConstants from "../etc/appConstants";
 
 class DelphiMatchList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedUsername: null,
-      userArray: null,
+      selectedUsername: props.selectedUsername,
       taskArray: null,
       errorMessage: null
     };
 
     this.loadTaskArray = this.loadTaskArray.bind(this);
-    this.loadUserArray = this.loadUserArray.bind(this);
     this.formatTaskArray = this.formatTaskArray.bind(this);
-    this.formatUserArray = this.formatUserArray.bind(this);
-    this.selectUsername = this.selectUsername.bind(this);
+  }
+
+  //Quando il padre aggiorna le props, questo statico restituisce
+  //un oggetto/argomento per setState()
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.selectedUsername === prevState.selectedUsername) {
+      //console.log("getDerivedStateFromProps no change");
+      return {};
+    } else {
+      //console.log("getDerivedStateFromProps CHANGED");
+      return {
+        selectedUsername: nextProps.selectedUsername
+      };
+    }
   }
 
   componentDidMount() {
-    this.loadUserArray();
+    this.loadTaskArray();
   }
 
-  loadUserArray() {
-    let userEndpoint =
-      this.props.constants.apiEndpoint + this.props.constants.apiViewAllUsers;
-    fetch(userEndpoint, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(restData => {
-        if (restData.status >= 400) {
-          this.setState({ errorMessage: "Connessione non riuscita" });
-        } else {
-          this.setState({ userArray: restData });
-          //set first selectedUsername
-          if (this.state.selectedUsername == null) {
-            if (this.state.userArray != null) {
-              if (this.state.userArray.length > 0) {
-                this.setState({
-                  selectedUsername: this.state.userArray[0].username
-                });
-              }
-            }
-          }
-        }
-      })
-      .catch(this.setState({ errorMessage: "Connessione non riuscita" }));
-  }
-
-  formatUserArray() {
-    if (this.state.selectedUsername !== null) {
-      return (
-        <div className='row'>
-          <div className='col-sm-2'>
-            <Form.Label>Utente:</Form.Label>
-          </div>
-          <div className='col-sm-10'>
-            <Form.Control
-              as='select'
-              onChange={this.selectUsername}
-              onLoad={this.selectUsername}
-              name='role'
-              size='sm'
-              value={this.state.selectedUsername}
-              required>
-              {this.state.userArray.map(user => (
-                <option key={user.username}>{user.username}</option>
-              ))}
-            </Form.Control>
-          </div>
-        </div>
-      );
-    } else return <div></div>;
-  }
+  /*componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selectedUsername !== prevState.selectedUsername) {
+      console.log("componentDidUpdate CHANGED");
+      this.loadTaskArray();
+    }
+  }*/
 
   loadTaskArray() {
-    let taskEndpoint =
-      this.props.constants.apiEndpoint + this.props.constants.apiViewAllTasks;
+    let taskEndpoint = appConstants.apiEndpoint + appConstants.apiViewAllTasks;
     fetch(taskEndpoint, {
       method: "GET",
       headers: {
@@ -109,35 +69,19 @@ class DelphiMatchList extends React.Component {
         key={task.id}
         task={task}
         selectedUsername={this.state.selectedUsername}
-        constants={this.props.constants}
       />
     ));
   }
 
-  selectUsername(event) {
-    console.log("changed");
-    this.setState({
-      selectedUsername: event.target.value
-    });
-    this.loadTaskArray();
-  }
-
   render() {
-    var userSelect = "";
     var taskList = (
       <tr>
         <td></td>
       </tr>
     );
-    if (this.state.userArray != null) userSelect = this.formatUserArray();
     if (this.state.taskArray != null) taskList = this.formatTaskArray();
     return (
       <div>
-        <p>
-          In questa pagina è possibile selezionare quali saranno i task visibili
-          per ciascun utente di Delphi
-        </p>
-        {userSelect}
         <table>
           <thead>
             <tr>

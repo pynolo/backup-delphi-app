@@ -2,6 +2,8 @@ import React from "react";
 import ErrorBoundary from "../ErrorBoundary";
 import DelphiMatchCheckbox from "./DelphiMatchCheckbox";
 
+import appConstants from "../etc/appConstants";
+
 class DelphiMatch extends React.Component {
   constructor(props) {
     super(props);
@@ -21,21 +23,26 @@ class DelphiMatch extends React.Component {
 
   //Quando il padre aggiorna le props, questo statico restituisce un oggetto/argomento per setState()
   static getDerivedStateFromProps(nextProps, prevState) {
-    return nextProps.task === prevState.task &&
+    if (
+      nextProps.task === prevState.task &&
       nextProps.selectedUsername === prevState.selectedUsername
-      ? {}
-      : {
-          task: nextProps.task,
-          selectedUsername: nextProps.selectedUsername
-        };
+    ) {
+      //console.log("getDerivedStateFromProps no change");
+      return {};
+    } else {
+      //console.log("getDerivedStateFromProps CHANGED");
+      return {
+        task: nextProps.task,
+        selectedUsername: nextProps.selectedUsername
+      };
+    }
   }
 
   render() {
     let row = "";
     if (
-      this.props.constants.environmentFilter ===
-        this.state.task.environmentName &&
-      this.props.constants.workspaceFilter === this.state.task.workspaceName
+      appConstants.environmentFilter === this.state.task.environmentName &&
+      appConstants.workspaceFilter === this.state.task.workspaceName
     ) {
       row = (
         <tr>
@@ -45,7 +52,6 @@ class DelphiMatch extends React.Component {
                 key={this.state.task.id}
                 selectedUsername={this.state.selectedUsername}
                 task={this.state.task}
-                constants={this.props.constants}
               />
             </ErrorBoundary>
           </td>
