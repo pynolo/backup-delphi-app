@@ -36,7 +36,9 @@ class DelphiNavBar extends React.Component {
     if (this.state.username === null) {
       menuItems = (
         <Nav className='mr-auto'>
-          <Nav.Link href='/login'>Login</Nav.Link>
+          <Nav.Item href='/login' className='text-light'>
+            Sistema semplificato di esecuzione task
+          </Nav.Item>
         </Nav>
       );
     } else {

@@ -81,34 +81,40 @@ class LoginForm extends Component {
       }
     }
     let out = (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Group controlId='formUsername'>
-          <Form.Label>Nome utente</Form.Label>
-          <Form.Control
-            type='username'
-            name='username'
-            onChange={this.handleChange}
-            required
-          />
-          <Form.Text className='text-muted'>
-            Il tuo nome utente nella rete Giunti
-          </Form.Text>
-        </Form.Group>
+      <div>
+        <div className='frontcover'> </div>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId='formUsername'>
+            <Form.Label>Nome utente</Form.Label>
+            <Form.Control
+              type='username'
+              name='username'
+              onChange={this.handleChange}
+              required
+            />
+            <Form.Text className='text-muted'>
+              Il tuo nome utente nella rete Giunti
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group controlId='formPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            name='password'
-            onChange={this.handleChange}
-            required
-          />
-        </Form.Group>
-        {warning}
-        <Button variant='primary' type='submit'>
-          Invia
-        </Button>
-      </Form>
+          <Form.Group controlId='formPassword'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='password'
+              name='password'
+              onChange={this.handleChange}
+              required
+            />
+            <Form.Text className='text-muted'>
+              La password che usi per la tua postazione
+            </Form.Text>
+          </Form.Group>
+          {warning}
+          <Button variant='primary' type='submit'>
+            Invia
+          </Button>
+        </Form>
+      </div>
     );
     return out;
   }

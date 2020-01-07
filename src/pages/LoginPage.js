@@ -13,11 +13,11 @@ class LoginPage extends React.Component {
         <DelphiNavBar />
         <Container>
           <Row>
-            <Col lg={4}>&nbsp;</Col>
-            <Col lg={4}>
+            <Col xl={3}>&nbsp;</Col>
+            <Col xl={6}>
               <LoginForm />
             </Col>
-            <Col lg={4}>&nbsp;</Col>
+            <Col xl={3}>&nbsp;</Col>
           </Row>
         </Container>
       </div>
