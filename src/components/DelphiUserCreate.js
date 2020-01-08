@@ -41,8 +41,8 @@ class DelphiUserCreate extends React.Component {
         } else {
           window.location.reload();
         }
-      })
-      .catch(this.handleError("Impossibile creare l'utente"));
+      });
+    //.catch(this.handleError("Impossibile creare l'utente"));
     event.preventDefault();
   }
 

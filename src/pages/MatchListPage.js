@@ -84,7 +84,6 @@ class MatchListPage extends React.Component {
   }
 
   selectUsername(event) {
-    console.log("changed");
     this.setState({
       selectedUsername: event.target.value
     });
@@ -99,8 +98,8 @@ class MatchListPage extends React.Component {
         <p></p>
         <Container>
           <Row>
-            <Col sm={1}>&nbsp;</Col>
-            <Col md='auto'>
+            <Col lg={1}>&nbsp;</Col>
+            <Col lg='auto'>
               {userSelect}
               <DelphiMatchList selectedUsername={this.state.selectedUsername} />
             </Col>

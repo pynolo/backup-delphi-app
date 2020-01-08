@@ -129,7 +129,7 @@ export default class DelphiMatchCheckbox extends React.Component {
     return (
       <Container fluid='true'>
         <Row noGutters='true'>
-          <Col xl='auto'>
+          <Col sm='auto'>
             <Form.Check
               type='checkbox'
               name={this.state.executable}
@@ -138,17 +138,18 @@ export default class DelphiMatchCheckbox extends React.Component {
               onChange={this.saveValue}
             />
           </Col>
-          <Col xl='auto'>{type}</Col>
-          <Col xl='auto'>
-            <Badge
-              variant='outline-warning'
-              className='text-warning text-nowrap'
-              size='sm'>
-              {this.state.task.workspaceName} {this.state.task.environmentName}
-            </Badge>
-          </Col>
+          <Col sm='auto'>{type}</Col>
         </Row>
       </Container>
     );
+    /*<Col sm='auto'>
+      <Badge
+        variant='outline-warning'
+        className='text-warning text-nowrap'
+        size='sm'>
+        {this.state.task.workspaceName}{" "}
+        {this.state.task.environmentName}
+      </Badge>
+    </Col>;*/
   }
 }

@@ -45,20 +45,16 @@ class DelphiMatch extends React.Component {
       appConstants.workspaceFilter === this.state.task.workspaceName
     ) {
       row = (
-        <tr>
-          <td>
-            <ErrorBoundary>
-              <DelphiMatchCheckbox
-                key={this.state.task.id}
-                selectedUsername={this.state.selectedUsername}
-                task={this.state.task}
-              />
-            </ErrorBoundary>
-          </td>
-        </tr>
+        <ErrorBoundary>
+          <DelphiMatchCheckbox
+            key={this.state.task.id}
+            selectedUsername={this.state.selectedUsername}
+            task={this.state.task}
+          />
+        </ErrorBoundary>
       );
     } else {
-      row = <tr style={{ display: "none" }}></tr>;
+      row = <p style={{ display: "none" }}></p>;
     }
     return row;
   }
