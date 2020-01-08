@@ -15,7 +15,7 @@ function TaskListPage() {
       <p></p>
       <Container>
         <Row>
-          <Col sm={1}>&nbsp;</Col>
+          <Col md={1}>&nbsp;</Col>
           <Col md='auto'>
             <DelphiTaskList constants={appConstants} />
           </Col>

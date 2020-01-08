@@ -98,8 +98,8 @@ class MatchListPage extends React.Component {
         <p></p>
         <Container>
           <Row>
-            <Col lg={1}>&nbsp;</Col>
-            <Col lg='auto'>
+            <Col md={1}>&nbsp;</Col>
+            <Col md='auto'>
               {userSelect}
               <DelphiMatchList selectedUsername={this.state.selectedUsername} />
             </Col>

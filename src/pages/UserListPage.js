@@ -14,7 +14,7 @@ function UserListPage() {
       <DelphiNavBar />
       <Container>
         <Row>
-          <Col sm={1}>&nbsp;</Col>
+          <Col md={1}>&nbsp;</Col>
           <Col md='auto'>
             <DelphiUserList constants={appConstants} />
           </Col>
