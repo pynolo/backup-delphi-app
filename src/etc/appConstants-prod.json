@@ -1,4 +1,5 @@
 {
+	"install": "beta",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "TEST",
 	"apiEndpoint": "http://astest.intranet.giunti.it:81/delphi-server",
