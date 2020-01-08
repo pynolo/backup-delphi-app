@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Button";
 
 import ExecutablePanel from "./ExecutablePanel";
 
@@ -14,9 +14,9 @@ class DelphiTask extends React.Component {
       let type = "";
       if (this.props.task.type === "plan") {
         type = (
-          <Button variant='outline-info' size='sm'>
+          <Badge variant='info' size='sm'>
             PLAN
-          </Button>
+          </Badge>
         );
       }
       row = (
