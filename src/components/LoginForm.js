@@ -83,6 +83,7 @@ class LoginForm extends Component {
     let out = (
       <div>
         <div className='frontcover'> </div>
+        <p></p>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId='formUsername'>
             <Form.Label>Nome utente</Form.Label>
