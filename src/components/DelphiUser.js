@@ -35,7 +35,17 @@ class DelphiUser extends React.Component {
     let delButton = <div></div>;
     if (this.props.user.username !== this.props.username) {
       delButton = (
-        <Button onClick={this.deleteUser} variant='warning' size='sm'>
+        <Button
+          onClick={e => {
+            if (
+              window.confirm(
+                "Confermi l'eliminazione di " + this.props.user.username + "?"
+              )
+            )
+              this.deleteUser(e);
+          }}
+          variant='warning'
+          size='sm'>
           Elimina
         </Button>
       );
