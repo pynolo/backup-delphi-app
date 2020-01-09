@@ -23,7 +23,7 @@ class App extends React.Component {
       username: username
     };
     this.updateTasks = this.updateTasks.bind(this);
-    this.refreshPage = this.refreshPage.bind(this);
+    //this.refreshPage = this.refreshPage.bind(this);
   }
 
   componentDidMount() {
@@ -53,16 +53,16 @@ class App extends React.Component {
       );*/
   }
 
-  refreshPage() {
+  /*refreshPage() {
     window.location.reload();
-  }
+  }*/
 
   render() {
     let routeSwitch = "";
     if (this.state.username != null) {
+      // LOGGED IN
       routeSwitch = (
         <Switch>
-          <Redirect from='/login' to='/tasklist' />
           <Route
             path='/tasklist'
             render={props => (
@@ -81,9 +81,12 @@ class App extends React.Component {
               <MatchListPage username={this.state.username} {...props} />
             )}
           />
+          <Redirect from='/login' to='/tasklist' />
+          <Redirect from='/' to='/tasklist' />
         </Switch>
       );
     } else {
+      // LOGGED OUT
       routeSwitch = (
         <Switch>
           <Route path='/login' render={props => <LoginPage {...props} />} />
