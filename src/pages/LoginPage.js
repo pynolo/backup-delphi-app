@@ -3,8 +3,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import LoginForm from "../components/LoginForm";
-import DelphiNavBar from "../components/DelphiNavBar";
+import LoginForm from "../comp/LoginForm";
+import DelphiNavBar from "../comp/DelphiNavBar";
 
 class LoginPage extends React.Component {
   render() {

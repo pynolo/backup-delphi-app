@@ -1,11 +1,10 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Badge from "react-bootstrap/Badge";
-
 import { Container } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
 
-import appConstants from "../etc/appConstants";
+import appConstants from "../../etc/appConstants";
 
 export default class DelphiMatchCheckbox extends React.Component {
   constructor(props) {

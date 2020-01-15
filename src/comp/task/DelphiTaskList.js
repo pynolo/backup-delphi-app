@@ -1,7 +1,7 @@
 import React from "react";
 
 import DelphiTask from "./DelphiTask";
-import { getUsername } from "./LoginCookie";
+import { getUsername } from "../LoginCookie";
 
 class DelphiTaskList extends React.Component {
   constructor(props) {

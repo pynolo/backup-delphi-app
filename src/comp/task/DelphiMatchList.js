@@ -2,7 +2,7 @@ import React from "react";
 
 import DelphiMatch from "./DelphiMatch";
 
-import appConstants from "../etc/appConstants";
+import appConstants from "../../etc/appConstants";
 
 class DelphiMatchList extends React.Component {
   constructor(props) {

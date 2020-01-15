@@ -4,8 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
-import DelphiMatchList from "../components/DelphiMatchList";
-import DelphiNavBar from "../components/DelphiNavBar";
+import DelphiMatchList from "../comp/task/DelphiMatchList";
+import DelphiNavBar from "../comp/DelphiNavBar";
 
 import appConstants from "../etc/appConstants";
 

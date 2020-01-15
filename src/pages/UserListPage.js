@@ -3,8 +3,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import DelphiUserList from "../components/DelphiUserList";
-import DelphiNavBar from "../components/DelphiNavBar";
+import DelphiUserList from "../comp/DelphiUserList";
+import DelphiNavBar from "../comp/DelphiNavBar";
 
 import appConstants from "../etc/appConstants";
 

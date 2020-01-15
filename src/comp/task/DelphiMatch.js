@@ -1,8 +1,9 @@
 import React from "react";
-import ErrorBoundary from "../ErrorBoundary";
+
+import ErrorBoundary from "../../ErrorBoundary";
 import DelphiMatchCheckbox from "./DelphiMatchCheckbox";
 
-import appConstants from "../etc/appConstants";
+import appConstants from "../../etc/appConstants";
 
 class DelphiMatch extends React.Component {
   constructor(props) {
