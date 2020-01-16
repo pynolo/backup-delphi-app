@@ -2,7 +2,7 @@
 	"install": "beta",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "PROD",
-	"apiEndpoint": "http://astest.intranet.giunti.it:81/delphi-server",
+	"apiEndpoint": "http://delphi.intranet.giunti.it:81/delphi-server",
 	"apiAuthenticate": "/api/authenticate",
 	"apiViewAllTasks": "/api/viewalltasks",
 	"apiUpdateTasks": "/api/updatetasks",
