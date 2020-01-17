@@ -68,11 +68,12 @@ class ExecutionPanel extends React.Component {
         });
       })
       .catch(console.log);
+    this.interval = setInterval(() => this.updateExecution(), 1000);
   }
 
   componentDidMount() {
     this.updateExecution();
-    this.interval = setInterval(() => this.updateExecution(), 4000);
+    //this.interval = setInterval(() => this.updateExecution(), 10000);
   }
 
   componentWillUnmount() {
@@ -97,10 +98,12 @@ class ExecutionPanel extends React.Component {
         if (this.state.response.executionStatus === "EXECUTION_SUCCESS") {
           messageClassName = "text-success";
           finished = true;
+          clearInterval(this.interval);
         }
         if (this.state.response.executionStatus === "EXECUTION_FAILED") {
           messageClassName = "text-danger";
           finished = true;
+          clearInterval(this.interval);
         }
         execStatus = (
           <span className={messageClassName}>
