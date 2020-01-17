@@ -72,7 +72,7 @@ class ExecutionPanel extends React.Component {
 
   componentDidMount() {
     this.updateExecution();
-    this.interval = setInterval(() => this.updateExecution(), 2000);
+    this.interval = setInterval(() => this.updateExecution(), 4000);
   }
 
   componentWillUnmount() {
@@ -84,6 +84,7 @@ class ExecutionPanel extends React.Component {
   render() {
     let out = <div></div>;
     let finished = false;
+    let messageClassName = "text-dark";
     if (
       typeof this.state.response !== "undefined" &&
       this.state.response != null
@@ -93,27 +94,23 @@ class ExecutionPanel extends React.Component {
         typeof this.state.response.executionStatus !== "undefined" &&
         this.state.response.executionStatus != null
       ) {
+        if (this.state.response.executionStatus === "EXECUTION_SUCCESS") {
+          messageClassName = "text-success";
+          finished = true;
+        }
+        if (this.state.response.executionStatus === "EXECUTION_FAILED") {
+          messageClassName = "text-danger";
+          finished = true;
+        }
         execStatus = (
-          <span className='text-info'>
+          <span className={messageClassName}>
             {this.state.response.executionStatus
               .toLowerCase()
               .split("_")
               .join("\xa0")}
           </span>
         );
-        if (this.state.response.executionStatus === "EXECUTION_SUCCESS")
-          finished = true;
-      }
-      let errorMsg = "";
-      if (
-        typeof this.state.response.errorMessage !== "undefined" &&
-        this.state.response.errorMessage != null
-      ) {
-        errorMsg = (
-          <span className='text-danger'>
-            {this.state.response.errorMessage}
-          </span>
-        );
+      } else {
         finished = true;
       }
       let button = "";
@@ -127,9 +124,7 @@ class ExecutionPanel extends React.Component {
         <div class='container'>
           <div className='row'>
             <div className='col-sm'>{button}</div>
-            <div className='col-sm'>
-              {execStatus} {errorMsg}
-            </div>
+            <div className='col-sm'>{execStatus}</div>
           </div>
         </div>
       );

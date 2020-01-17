@@ -23,17 +23,16 @@ class DelphiTask extends React.Component {
       row = (
         <tr>
           <td className='align-middle'>
-            <div className='font-weight-bold'>
+            <span className='font-weight-bold'>
               {this.props.task.name}
               {type}
-            </div>
+            </span>
           </td>
           <td>
             <ExecutionPanel
               executable={this.props.task.executable}
               type={this.props.task.type}
             />
-            &nbsp;
           </td>
         </tr>
       );
