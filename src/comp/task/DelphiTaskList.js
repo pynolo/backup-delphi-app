@@ -2,6 +2,7 @@ import React from "react";
 
 import DelphiTask from "./DelphiTask";
 import { getUsername } from "../LoginCookie";
+import appConstants from "../../etc/appConstants";
 
 class DelphiTaskList extends React.Component {
   constructor(props) {
@@ -24,8 +25,8 @@ class DelphiTaskList extends React.Component {
   loadData() {
     if (this.state.username !== null) {
       let taskEndpoint =
-        this.props.constants.apiEndpoint +
-        this.props.constants.apiViewAllTasks +
+        appConstants.apiEndpoint +
+        appConstants.apiViewAllTasks +
         "/" +
         this.state.username;
       taskEndpoint = encodeURI(taskEndpoint);
@@ -55,24 +56,20 @@ class DelphiTaskList extends React.Component {
     }
     if (this.state.username !== null && hasTaskList) {
       var taskComponents = this.state.taskArray.map(task => (
-        <DelphiTask
-          key={task.id}
-          task={task}
-          constants={this.props.constants}
-        />
+        <DelphiTask key={task.id} task={task} />
       ));
       return (
         <table>
           <thead>
             <tr>
               <td>
+                <h3>
+                  Task - {appConstants.workspaceFilter}{" "}
+                  {appConstants.environmentFilter}
+                </h3>
+              </td>
+              <td>
                 <h3>&nbsp;</h3>
-              </td>
-              <td>
-                <h3>Task</h3>
-              </td>
-              <td>
-                <h3>Area</h3>
               </td>
             </tr>
           </thead>

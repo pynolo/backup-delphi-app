@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 
+import appConstants from "../etc/appConstants";
+
 class DelphiUser extends React.Component {
   constructor(props) {
     super(props);
@@ -10,8 +12,8 @@ class DelphiUser extends React.Component {
 
   deleteUser() {
     let taskEndpoint =
-      this.props.constants.apiEndpoint +
-      this.props.constants.apiRemoveUser +
+      appConstants.apiEndpoint +
+      appConstants.apiRemoveUser +
       "/" +
       this.props.user.username;
     fetch(taskEndpoint, {
@@ -53,14 +55,11 @@ class DelphiUser extends React.Component {
     let row = (
       <tr>
         <td>
-          {delButton}
-          &nbsp;
-        </td>
-        <td>
           <div className='font-weight-bold'>
             {this.props.user.username} ({this.props.user.role})
           </div>
         </td>
+        <td>{delButton}</td>
       </tr>
     );
     return row;

@@ -3,6 +3,8 @@ import DelphiUser from "./DelphiUser";
 import DelphiUserCreate from "./DelphiUserCreate";
 import { getUsername } from "./LoginCookie";
 
+import appConstants from "../etc/appConstants";
+
 class DelphiUserList extends React.Component {
   constructor(props) {
     super(props);
@@ -21,8 +23,7 @@ class DelphiUserList extends React.Component {
   }
 
   loadData() {
-    let userEndpoint =
-      this.props.constants.apiEndpoint + this.props.constants.apiViewAllUsers;
+    let userEndpoint = appConstants.apiEndpoint + appConstants.apiViewAllUsers;
     fetch(userEndpoint, {
       method: "GET",
       headers: {
@@ -45,12 +46,7 @@ class DelphiUserList extends React.Component {
   formatData() {
     let username = getUsername();
     var userComponents = this.state.userArray.map(user => (
-      <DelphiUser
-        key={user.username}
-        user={user}
-        username={username}
-        constants={this.props.constants}
-      />
+      <DelphiUser key={user.username} user={user} username={username} />
     ));
     this.setState({
       status: "running",
@@ -63,15 +59,15 @@ class DelphiUserList extends React.Component {
     return (
       <div>
         <p></p>
-        <DelphiUserCreate constants={this.props.constants} />
+        <DelphiUserCreate />
         <table>
           <thead>
             <tr>
               <td>
-                <h3>&nbsp;</h3>
+                <h3>Utenti</h3>
               </td>
               <td>
-                <h3>Utenti e ruoli</h3>
+                <h3>&nbsp;</h3>
               </td>
             </tr>
           </thead>

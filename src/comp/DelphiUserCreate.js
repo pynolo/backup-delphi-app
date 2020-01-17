@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
+import appConstants from "../etc/appConstants";
+
 class DelphiUserCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +22,7 @@ class DelphiUserCreate extends React.Component {
   }
 
   handleSubmit(event) {
-    let taskEndpoint =
-      this.props.constants.apiEndpoint + this.props.constants.apiCreateUser;
+    let taskEndpoint = appConstants.apiEndpoint + appConstants.apiCreateUser;
     let bodyObj = {
       username: event.target.elements.username.value,
       role: event.target.elements.role.value

@@ -1,11 +1,13 @@
-"/api/authenticate", //POST
-"/api/viewalltasks", //GET + GET/{username} per filtro utente
-"/api/updatetasks", //POST
-"/api/executebyid", //GET/{type}/{executable}
-"/api/findexecution", //GET/{type}/{executable}
-"/api/createuser", //POST
-"/api/changeuser", //PUT
-"/api/removeuser", //DEL/{username}
-"/api/viewallusers", //GET
-"/api/viewusertask", //GET/{username}/{executable}
-"/api/changeusertask" //POST
+POST /api/authenticate
+GET  /api/viewalltasks
+GET  /api/viewalltasks/{username} //per filtro utente
+POST /api/updatetasks
+GET  /api/execute/{type}/{executable}
+GET  /api/findexecutionbyid/{type}/{executionId}
+GET  /api/findexecutionbyexecutable/{type}/{executable}
+POST /api/createuser
+PUT  /api/changeuser
+DEL  /api/removeuser/{username}
+GET  /api/viewallusers
+GET  /api/viewusertask/{username}/{executable}
+POST /api/changeusertask

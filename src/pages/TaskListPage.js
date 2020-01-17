@@ -6,8 +6,6 @@ import Col from "react-bootstrap/Col";
 import DelphiTaskList from "../comp/task/DelphiTaskList";
 import DelphiNavBar from "../comp/DelphiNavBar";
 
-import appConstants from "../etc/appConstants";
-
 function TaskListPage() {
   return (
     <div>
@@ -17,7 +15,7 @@ function TaskListPage() {
         <Row>
           <Col md={1}>&nbsp;</Col>
           <Col md='auto'>
-            <DelphiTaskList constants={appConstants} />
+            <DelphiTaskList />
           </Col>
         </Row>
       </Container>
