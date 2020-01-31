@@ -1,5 +1,5 @@
 {
-	"install": "qlt",
+	"install": "quality",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "TEST",
 	"apiEndpoint": "http://delphi-qlt.intranet.giunti.it:81/delphi-server",

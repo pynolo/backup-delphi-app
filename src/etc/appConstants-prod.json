@@ -1,5 +1,5 @@
 {
-	"install": "beta",
+	"install": "",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "PROD",
 	"apiEndpoint": "http://delphi.intranet.giunti.it:81/delphi-server",
