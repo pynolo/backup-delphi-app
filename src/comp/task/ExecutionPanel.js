@@ -84,45 +84,52 @@ class ExecutionPanel extends React.Component {
 
   render() {
     let out = <div></div>;
-    let finished = false;
+    let isButtonShown = true; //Always true
+    let message = "pronto";
     let messageClassName = "text-dark";
     if (
       typeof this.state.response !== "undefined" &&
       this.state.response != null
     ) {
-      let execStatus = "";
       if (
         typeof this.state.response.executionStatus !== "undefined" &&
-        this.state.response.executionStatus != null
+        this.state.response.executionStatus != null &&
+        this.state.response.executionStatus !== ""
       ) {
+        message = this.state.response.executionStatus
+          .toLowerCase()
+          .split("_")
+          .join("\xa0");
+        // Success: Green
         if (this.state.response.executionStatus === "EXECUTION_SUCCESS") {
           messageClassName = "text-success";
-          finished = true;
+          isButtonShown = true;
           clearInterval(this.interval);
         }
-        if (this.state.response.executionStatus === "EXECUTION_FAILED") {
+        // Error: Red
+        if (
+          this.state.response.executionStatus === "EXECUTION_FAILED" ||
+          this.state.response.executionStatus === "EXECUTION_TERMINATED"
+        ) {
           messageClassName = "text-danger";
-          finished = true;
+          isButtonShown = true;
           clearInterval(this.interval);
         }
-        execStatus = (
-          <span className={messageClassName}>
-            {this.state.response.executionStatus
-              .toLowerCase()
-              .split("_")
-              .join("\xa0")}
-          </span>
-        );
+        // Ongoing: black && hidden button
+        if (this.state.response.executionStatus === "STARTING_FLOW_EXECUTION") {
+          isButtonShown = false;
+        }
       } else {
-        finished = true;
+        isButtonShown = true;
       }
       let button = "";
-      if (finished)
+      if (isButtonShown)
         button = (
           <Button onClick={this.runTask} variant='primary' size='sm'>
             Esegui
           </Button>
         );
+      let execStatus = <span className={messageClassName}>{message}</span>;
       out = (
         <div class='container'>
           <div className='row'>
