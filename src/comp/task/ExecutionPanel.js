@@ -12,13 +12,15 @@ class ExecutionPanel extends React.Component {
     this.state = {
       response: null
     };
+    this.longInterval = 6000;
+    this.shortInterval = 800;
 
     this.updateExecution = this.updateExecution.bind(this);
     this.runTask = this.runTask.bind(this);
   }
 
   updateExecution() {
-    console.log("update");
+    //console.log("update");
     let taskEndpoint =
       appConstants.apiEndpoint +
       appConstants.apiFindExecutionByExecutable +
@@ -39,16 +41,11 @@ class ExecutionPanel extends React.Component {
           response: data
         });
       })
-      .catch(error => {
-        this.setState({
-          response: error
-        });
-        console.log(error);
-      });
+      .catch(console.log);
   }
 
   runTask() {
-    console.log("run");
+    //console.log("run");
     let taskEndpoint =
       appConstants.apiEndpoint +
       appConstants.apiExecute +
@@ -70,12 +67,14 @@ class ExecutionPanel extends React.Component {
         });
       })
       .catch(console.log);
-    this.interval = setInterval(() => this.updateExecution(), 1000);
+    this.interval = setInterval(
+      () => this.updateExecution(),
+      this.shortInterval
+    );
   }
 
   componentDidMount() {
     this.updateExecution();
-    //this.interval = setInterval(() => this.updateExecution(), 10000);
   }
 
   componentWillUnmount() {
@@ -107,6 +106,10 @@ class ExecutionPanel extends React.Component {
           messageClassName = "text-success";
           isButtonShown = true;
           clearInterval(this.interval);
+          this.interval = setInterval(
+            () => this.updateExecution(),
+            this.longInterval
+          );
         }
         // Error: Red
         if (
@@ -116,6 +119,10 @@ class ExecutionPanel extends React.Component {
           messageClassName = "text-danger";
           isButtonShown = true;
           clearInterval(this.interval);
+          this.interval = setInterval(
+            () => this.updateExecution(),
+            this.longInterval
+          );
         }
         // Ongoing: black && hidden button
         if (
@@ -153,7 +160,7 @@ class ExecutionPanel extends React.Component {
         </Popover>
       );
       out = (
-        <div class='container'>
+        <div className='container'>
           <div className='row'>
             <div className='text-left' style={padded}>
               {button}
@@ -172,75 +179,6 @@ class ExecutionPanel extends React.Component {
     }
     return out;
   }
-
-  /*  render() {
-    let out = <div></div>;
-    if (
-      typeof this.state.response !== "undefined" &&
-      this.state.response != null
-    ) {
-      if (
-        typeof this.state.response.finishTimestamp !== "undefined" &&
-        this.state.response.finishTimestamp != null
-      ) {
-        //finishTimestamp not null => finished & ready
-        let detail = (
-          <span>
-            Terminato alle{" "}
-            {new Intl.DateTimeFormat("it-IT", {
-              dateStyle: "short",
-              timeStyle: "long"
-            }).format(this.state.response.finishTimestamp)}
-          </span>
-        );
-        if (
-          typeof this.state.response.errorMessage !== "undefined" &&
-          this.state.response.errorMessage != null
-        ) {
-          if (this.state.response.errorMessage.length > 0) {
-            detail = <span>Errore: {this.state.response.errorMessage}</span>;
-          }
-        }
-        out = (
-          <div>
-            <Button onClick={this.runTask} variant='primary' size='sm'>
-              Esegui
-            </Button>
-            {detail}
-          </div>
-        );
-      } else {
-        if (
-          typeof this.state.response.startTimestamp !== "undefined" &&
-          this.state.response.startTimestamp !== null
-        ) {
-          //finishTimestamp null & startTimestamp not null => running
-          out = (
-            <div>
-              Avviato alle{" "}
-              {new Intl.DateTimeFormat("it-IT", {
-                dateStyle: "short",
-                timeStyle: "long"
-              }).format(this.state.response.startTimestamp)}
-            </div>
-          );
-        } else {
-          //finishTimestamp null & startTimestamp null => clean & ready
-          out = (
-            <div>
-              <Button onClick={this.runTask} variant='primary' size='sm'>
-                Esegui
-              </Button>
-            </div>
-          );
-        }
-      }
-    } else {
-      //response = null => waiting
-      out = <div>caricamento...</div>;
-    }
-    return out;
-  }*/
 }
 
 export default ExecutionPanel;
