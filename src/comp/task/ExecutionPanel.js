@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 import appConstants from "../../etc/appConstants";
 
@@ -78,14 +80,14 @@ class ExecutionPanel extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
-    this.updateExecution.cancel();
-    this.runTask.cancel();
+    //this.updateExecution.cancel();
+    //this.runTask.cancel();
   }
 
   render() {
     let out = <div></div>;
     let isButtonShown = true; //Always true
-    let message = "pronto";
+    let message = "ready";
     let messageClassName = "text-dark";
     if (
       typeof this.state.response !== "undefined" &&
@@ -116,25 +118,51 @@ class ExecutionPanel extends React.Component {
           clearInterval(this.interval);
         }
         // Ongoing: black && hidden button
-        if (this.state.response.executionStatus === "STARTING_FLOW_EXECUTION") {
+        if (
+          this.state.response.executionStatus === "STARTING_FLOW_EXECUTION" ||
+          this.state.response.executionStatus === "DISPATCHING_FLOW" ||
+          this.state.response.executionStatus === "STARTED"
+        ) {
           isButtonShown = false;
         }
       } else {
         isButtonShown = true;
       }
       let button = "";
-      if (isButtonShown)
+      if (isButtonShown) {
         button = (
           <Button onClick={this.runTask} variant='primary' size='sm'>
             Esegui
           </Button>
         );
+      } else {
+        button = (
+          <Button disabled variant='secondary' size='sm'>
+            Esegui
+          </Button>
+        );
+      }
       let execStatus = <span className={messageClassName}>{message}</span>;
+      let padded = { paddingLeft: "0.5rem" };
+      let popover = (
+        <Popover>
+          <Popover.Title as='h3'>
+            {this.state.response.executionStatus}
+          </Popover.Title>
+          <Popover.Content>{this.state.response.errorMessage}</Popover.Content>
+        </Popover>
+      );
       out = (
         <div class='container'>
           <div className='row'>
-            <div className='col-sm'>{button}</div>
-            <div className='col-sm'>{execStatus}</div>
+            <div className='text-left' style={padded}>
+              {button}
+            </div>
+            <OverlayTrigger trigger='click' placement='left' overlay={popover}>
+              <div className='text-left' style={padded}>
+                {execStatus}
+              </div>
+            </OverlayTrigger>
           </div>
         </div>
       );
