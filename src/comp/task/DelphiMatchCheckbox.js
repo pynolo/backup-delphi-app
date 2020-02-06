@@ -53,9 +53,9 @@ export default class DelphiMatchCheckbox extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.loadValue) {
-      this.loadValue.cancel();
-    }
+    //if (this.loadValue) {
+    //  this.loadValue.cancel();
+    //}
   }
 
   loadValue() {

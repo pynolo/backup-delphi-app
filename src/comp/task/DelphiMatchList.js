@@ -78,7 +78,7 @@ class DelphiMatchList extends React.Component {
     if (this.state.taskArray != null) taskList = this.formatTaskArray();
     return (
       <div style={{ width: "100%" }}>
-        <h3>Visibilità</h3>
+        <h3>Visibilità - descrizione</h3>
         {taskList}
       </div>
     );

@@ -1,8 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Badge from "react-bootstrap/Badge";
-import { Container } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 import "font-awesome/css/font-awesome.min.css";
 
@@ -14,11 +13,14 @@ export default class DelphiMatchCheckbox extends React.Component {
 
     this.state = {
       task: this.props.task,
-      isEditing: false
+      isEditing: false,
+      newDescription: this.props.task.description
     };
 
     this.loadValue = this.loadValue.bind(this);
     this.saveValue = this.saveValue.bind(this);
+    this.toggleEditing = this.toggleEditing.bind(this);
+    this.updateDescription = this.updateDescription.bind(this);
   }
 
   componentDidMount() {
@@ -26,9 +28,9 @@ export default class DelphiMatchCheckbox extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.loadValue) {
-      this.loadValue.cancel();
-    }
+    //if (this.loadValue) {
+    //  this.loadValue.cancel();
+    //}
   }
 
   loadValue() {
@@ -60,7 +62,7 @@ export default class DelphiMatchCheckbox extends React.Component {
       appConstants.apiEndpoint + appConstants.apiChangeTaskDescription;
     let bodyObj = {
       executable: this.state.task.executable,
-      description: this.state.task.description
+      description: this.state.newDescription
     };
     fetch(endpoint, {
       method: "POST",
@@ -73,39 +75,68 @@ export default class DelphiMatchCheckbox extends React.Component {
       .then(res => res.json())
       .then(restData => {
         this.setState({
-          task: restData
+          task: restData,
+          isEditing: false,
+          newDescription: restData.description
         });
       });
     //.catch(console.log(endpoint + ": Connessione non riuscita"));
   }
 
+  toggleEditing() {
+    this.setState({
+      isEditing: !this.state.isEditing,
+      newDescription: this.state.task.description
+    });
+  }
+
+  updateDescription(event) {
+    const value = event.target.value;
+    this.setState({
+      newDescription: value
+    });
+  }
+
   render() {
     let out = (
-      <Container fluid='true'>
-        <Row noGutters='true'>
-          <Col sm='auto'>{this.state.task.description}</Col>
+      <Form>
+        <Form.Row>
+          <Col sm='auto'>-</Col>
           <Col sm='auto'>
-            <Badge variant='dark' size='sm'>
-              <i class='fa fa-pencil' aria-hidden='true'></i>
+            <b>{this.state.newDescription}</b>
+          </Col>
+          <Col sm='auto'>
+            <Badge variant='dark' size='sm' onClick={this.toggleEditing}>
+              <i className='fa fa-pencil' aria-hidden='true'></i>
             </Badge>
           </Col>
-        </Row>
-      </Container>
+        </Form.Row>
+      </Form>
     );
     if (this.state.isEditing) {
       out = (
-        <Container fluid='true'>
-          <Row noGutters='true'>
+        <Form>
+          <Form.Row>
+            <Col sm='auto'>-</Col>
             <Col sm='auto'>
-              <Form.Text size='sm'>{this.state.task.description}</Form.Text>
+              <Form.Control
+                type='text'
+                size='sm'
+                onChange={this.updateDescription}
+                value={this.state.newDescription}></Form.Control>
             </Col>
             <Col sm='auto'>
-              <Badge variant='dark' size='sm'>
-                <i class='fa fa-check' aria-hidden='true'></i>
+              <Badge variant='dark' size='sm' onClick={this.saveValue}>
+                <i className='fa fa-check' aria-hidden='true'></i>
               </Badge>
             </Col>
-          </Row>
-        </Container>
+            <Col sm='auto'>
+              <Badge variant='dark' size='sm' onClick={this.toggleEditing}>
+                <i className='fa fa-times' aria-hidden='true'></i>
+              </Badge>
+            </Col>
+          </Form.Row>
+        </Form>
       );
     }
     return out;
