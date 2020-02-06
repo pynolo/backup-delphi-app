@@ -15,7 +15,7 @@ class DelphiTask extends React.Component {
       let type = "";
       if (this.props.task.type === "plan") {
         type = (
-          <Badge variant='outline-info' size='sm'>
+          <Badge disabled variant='outline-info' size='sm'>
             PLAN
           </Badge>
         );

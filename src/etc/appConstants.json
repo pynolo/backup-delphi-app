@@ -14,5 +14,7 @@
 	"apiRemoveUser": "/api/removeuser",
 	"apiViewAllUsers": "/api/viewallusers",
 	"apiViewUserTask": "/api/viewusertask",
-	"apiChangeUserTask": "/api/changeusertask"
+	"apiChangeUserTask": "/api/changeusertask",
+	"apiViewTaskByExecutable": "/api/viewtaskbyexecutable",
+	"apiChangeTaskDescription": "/api/changetaskdescription"
 }

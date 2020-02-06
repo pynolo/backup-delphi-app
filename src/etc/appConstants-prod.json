@@ -15,5 +15,7 @@
 	"apiViewAllUsers": "/api/viewallusers",
 	"apiViewUserTask": "/api/viewusertask",
 	"apiBindUserTask": "/api/bindusertask",
-	"apiChangeUserTask": "/api/changeusertask"
+	"apiChangeUserTask": "/api/changeusertask",
+	"apiViewTaskByExecutable": "/api/viewtaskbyexecutable",
+	"apiChangeTaskDescription": "/api/changetaskdescription"
 }

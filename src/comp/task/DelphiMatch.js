@@ -2,6 +2,9 @@ import React from "react";
 
 import ErrorBoundary from "../../ErrorBoundary";
 import DelphiMatchCheckbox from "./DelphiMatchCheckbox";
+import DelphiMatchDescription from "./DelphiMatchDescription";
+import { Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import appConstants from "../../etc/appConstants";
 
@@ -47,11 +50,23 @@ class DelphiMatch extends React.Component {
     ) {
       row = (
         <ErrorBoundary>
-          <DelphiMatchCheckbox
-            key={this.state.task.id}
-            selectedUsername={this.state.selectedUsername}
-            task={this.state.task}
-          />
+          <Container fluid='true'>
+            <Row noGutters='true'>
+              <Col sm='auto'>
+                <DelphiMatchCheckbox
+                  key={this.state.task.id}
+                  selectedUsername={this.state.selectedUsername}
+                  task={this.state.task}
+                />
+              </Col>
+              <Col sm='auto'>
+                <DelphiMatchDescription
+                  key={this.state.task.id}
+                  task={this.state.task}
+                />
+              </Col>
+            </Row>
+          </Container>
         </ErrorBoundary>
       );
     } else {

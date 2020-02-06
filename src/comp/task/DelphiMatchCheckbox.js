@@ -116,7 +116,6 @@ export default class DelphiMatchCheckbox extends React.Component {
   }
 
   render() {
-    let description = this.state.task.name;
     let type = "";
     if (this.state.task.type === "plan") {
       type = (
@@ -133,7 +132,7 @@ export default class DelphiMatchCheckbox extends React.Component {
               type='checkbox'
               name={this.state.executable}
               checked={this.state.match}
-              label={description}
+              label={this.state.task.name}
               onChange={this.saveValue}
             />
           </Col>
@@ -141,14 +140,5 @@ export default class DelphiMatchCheckbox extends React.Component {
         </Row>
       </Container>
     );
-    /*<Col sm='auto'>
-      <Badge
-        variant='outline-warning'
-        className='text-warning text-nowrap'
-        size='sm'>
-        {this.state.task.workspaceName}{" "}
-        {this.state.task.environmentName}
-      </Badge>
-    </Col>;*/
   }
 }
