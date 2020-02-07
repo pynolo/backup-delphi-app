@@ -62,8 +62,8 @@ class DelphiTaskList extends React.Component {
       return (
         <div>
           <h3>
-            Elenco task - {appConstants.workspaceFilter}{" "}
-            {appConstants.environmentFilter}
+            Elenco task ({appConstants.workspaceFilter.toLowerCase()}{" "}
+            {appConstants.environmentFilter.toLowerCase()})
           </h3>
           <Table striped responsive='sm'>
             <thead>

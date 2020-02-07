@@ -79,7 +79,10 @@ class DelphiMatchList extends React.Component {
     if (this.state.taskArray != null) taskList = this.formatTaskArray();
     return (
       <div style={{ width: "100%" }}>
-        <h3>Visualizzazione</h3>
+        <h3>
+          Visualizzazione ({appConstants.workspaceFilter.toLowerCase()}{" "}
+          {appConstants.environmentFilter.toLowerCase()})
+        </h3>
         <Table striped responsive='sm'>
           <thead>
             <tr>
