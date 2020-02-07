@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 
-import DelphiMatchList from "../comp/task/DelphiMatchList";
+import DelphiMatchTable from "../comp/task/DelphiMatchTable";
 import DelphiNavBar from "../comp/DelphiNavBar";
 
 import appConstants from "../etc/appConstants";
@@ -101,7 +101,9 @@ class MatchListPage extends React.Component {
             <Col md={1}>&nbsp;</Col>
             <Col md='auto'>
               {userSelect}
-              <DelphiMatchList selectedUsername={this.state.selectedUsername} />
+              <DelphiMatchTable
+                selectedUsername={this.state.selectedUsername}
+              />
             </Col>
           </Row>
         </Container>

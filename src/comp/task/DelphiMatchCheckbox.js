@@ -1,8 +1,8 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import Badge from "react-bootstrap/Badge";
-import { Container } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
+//import Badge from "react-bootstrap/Badge";
+//import { Container } from "react-bootstrap";
+//import { Row, Col } from "react-bootstrap";
 
 import appConstants from "../../etc/appConstants";
 
@@ -116,29 +116,13 @@ export default class DelphiMatchCheckbox extends React.Component {
   }
 
   render() {
-    let type = "";
-    if (this.state.task.type === "plan") {
-      type = (
-        <Badge variant='info' size='sm'>
-          PLAN
-        </Badge>
-      );
-    }
     return (
-      <Container fluid='true'>
-        <Row noGutters='true'>
-          <Col sm='auto'>
-            <Form.Check
-              type='checkbox'
-              name={this.state.executable}
-              checked={this.state.match}
-              label={this.state.task.name}
-              onChange={this.saveValue}
-            />
-          </Col>
-          <Col sm='auto'>{type}</Col>
-        </Row>
-      </Container>
+      <Form.Check
+        type='checkbox'
+        name={this.state.executable}
+        checked={this.state.match}
+        onChange={this.saveValue}
+      />
     );
   }
 }

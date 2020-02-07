@@ -1,6 +1,7 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
 
-import DelphiMatch from "./DelphiMatch";
+import DelphiMatchRow from "./DelphiMatchRow";
 
 import appConstants from "../../etc/appConstants";
 
@@ -65,7 +66,7 @@ class DelphiMatchList extends React.Component {
 
   formatTaskArray() {
     return this.state.taskArray.map(task => (
-      <DelphiMatch
+      <DelphiMatchRow
         key={task.id}
         task={task}
         selectedUsername={this.state.selectedUsername}
@@ -78,8 +79,19 @@ class DelphiMatchList extends React.Component {
     if (this.state.taskArray != null) taskList = this.formatTaskArray();
     return (
       <div style={{ width: "100%" }}>
-        <h3>Visibilità - descrizione</h3>
-        {taskList}
+        <h3>Visualizzazione</h3>
+        <Table striped>
+          <thead>
+            <tr>
+              <th>
+                <i class='fa fa-eye' aria-hidden='true'></i>
+              </th>
+              <th>Task</th>
+              <th>Descrizione</th>
+            </tr>
+          </thead>
+          <tbody>{taskList}</tbody>
+        </Table>
       </div>
     );
   }

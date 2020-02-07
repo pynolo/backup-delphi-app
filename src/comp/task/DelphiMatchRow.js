@@ -1,10 +1,11 @@
 import React from "react";
 
-import ErrorBoundary from "../../ErrorBoundary";
+//import ErrorBoundary from "../../ErrorBoundary";
 import DelphiMatchCheckbox from "./DelphiMatchCheckbox";
 import DelphiMatchDescription from "./DelphiMatchDescription";
-import { Container } from "react-bootstrap";
-import { Row, Col } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Form from "react-bootstrap/Form";
+import { Col } from "react-bootstrap";
 
 import appConstants from "../../etc/appConstants";
 
@@ -43,31 +44,43 @@ class DelphiMatch extends React.Component {
   }
 
   render() {
+    let type = "";
+    if (this.state.task.type === "plan") {
+      type = (
+        <Badge variant='info' size='sm'>
+          PLAN
+        </Badge>
+      );
+    }
     let row = "";
     if (
       appConstants.environmentFilter === this.state.task.environmentName &&
       appConstants.workspaceFilter === this.state.task.workspaceName
     ) {
       row = (
-        <ErrorBoundary>
-          <Container fluid='true'>
-            <Row noGutters='true'>
-              <Col sm='auto'>
-                <DelphiMatchCheckbox
-                  key={this.state.task.id}
-                  selectedUsername={this.state.selectedUsername}
-                  task={this.state.task}
-                />
-              </Col>
-              <Col sm='auto'>
-                <DelphiMatchDescription
-                  key={this.state.task.id}
-                  task={this.state.task}
-                />
-              </Col>
-            </Row>
-          </Container>
-        </ErrorBoundary>
+        <tr>
+          <td>
+            <DelphiMatchCheckbox
+              key={this.state.task.id}
+              selectedUsername={this.state.selectedUsername}
+              task={this.state.task}
+            />
+          </td>
+          <td>
+            <Form>
+              <Form.Row>
+                <Col sm='auto'>{this.state.task.name}</Col>
+                <Col sm='auto'>{type}</Col>
+              </Form.Row>
+            </Form>
+          </td>
+          <td>
+            <DelphiMatchDescription
+              key={this.state.task.id}
+              task={this.state.task}
+            />
+          </td>
+        </tr>
       );
     } else {
       row = <p style={{ display: "none" }}></p>;

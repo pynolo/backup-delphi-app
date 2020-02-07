@@ -51,7 +51,7 @@ class DelphiNavBar extends React.Component {
         menuItems = (
           <Nav className='mr-auto'>
             <Nav.Link href='/tasklist'>Elenco task</Nav.Link>
-            <Nav.Link href='/matchlist'>Visibilità</Nav.Link>
+            <Nav.Link href='/matchlist'>Visualizzazione</Nav.Link>
             <Nav.Link href='/userlist'>Utenti</Nav.Link>
             <Nav.Link href='/manuale-delphi.pdf'>Manuale</Nav.Link>
             <Nav.Link href='/#' onClick={this.logout}>
