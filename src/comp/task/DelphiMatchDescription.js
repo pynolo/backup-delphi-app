@@ -116,7 +116,6 @@ export default class DelphiMatchCheckbox extends React.Component {
       out = (
         <Form>
           <Form.Row>
-            <Col sm='auto'>-</Col>
             <Col sm='auto'>
               <Form.Control
                 type='text'

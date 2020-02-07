@@ -7,6 +7,20 @@ import appConstants from "../../etc/appConstants";
 
 class DelphiTask extends React.Component {
   render() {
+    let title = this.props.task.name;
+    let subtitle = "";
+    if (this.props.task.description !== null) {
+      if (this.props.task.description.length > 0) {
+        title = this.props.task.description;
+        subtitle = (
+          <span>
+            <br />
+            {this.props.task.name}
+          </span>
+        );
+      }
+    }
+
     let row = "";
     if (
       appConstants.environmentFilter === this.props.task.environmentName &&
@@ -24,9 +38,10 @@ class DelphiTask extends React.Component {
         <tr>
           <td className='align-middle'>
             <span className='font-weight-bold'>
-              {this.props.task.name}
+              {title}
               {type}
             </span>
+            {subtitle}
           </td>
           <td>
             <ExecutionPanel

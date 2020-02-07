@@ -1,6 +1,7 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
 
-import DelphiTask from "./DelphiTask";
+import DelphiTaskRow from "./DelphiTaskRow";
 import { getUsername } from "../LoginCookie";
 import appConstants from "../../etc/appConstants";
 
@@ -56,25 +57,24 @@ class DelphiTaskList extends React.Component {
     }
     if (this.state.username !== null && hasTaskList) {
       var taskComponents = this.state.taskArray.map(task => (
-        <DelphiTask key={task.id} task={task} />
+        <DelphiTaskRow key={task.id} task={task} />
       ));
       return (
-        <table>
-          <thead>
-            <tr>
-              <td>
-                <h3>
-                  Task - {appConstants.workspaceFilter}{" "}
-                  {appConstants.environmentFilter}
-                </h3>
-              </td>
-              <td>
-                <h3>&nbsp;</h3>
-              </td>
-            </tr>
-          </thead>
-          <tbody>{taskComponents}</tbody>
-        </table>
+        <div>
+          <h3>
+            Elenco task - {appConstants.workspaceFilter}{" "}
+            {appConstants.environmentFilter}
+          </h3>
+          <Table striped>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Stato</th>
+              </tr>
+            </thead>
+            <tbody>{taskComponents}</tbody>
+          </Table>
+        </div>
       );
     } else
       return (

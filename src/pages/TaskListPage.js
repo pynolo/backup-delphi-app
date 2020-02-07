@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import DelphiTaskList from "../comp/task/DelphiTaskList";
+import DelphiTaskTable from "../comp/task/DelphiTaskTable";
 import DelphiNavBar from "../comp/DelphiNavBar";
 
 function TaskListPage() {
@@ -15,7 +15,7 @@ function TaskListPage() {
         <Row>
           <Col md={1}>&nbsp;</Col>
           <Col md='auto'>
-            <DelphiTaskList />
+            <DelphiTaskTable />
           </Col>
         </Row>
       </Container>
