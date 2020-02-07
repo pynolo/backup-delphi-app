@@ -1,5 +1,7 @@
 import React from "react";
-import DelphiUser from "./DelphiUser";
+import Table from "react-bootstrap/Table";
+
+import DelphiUserRow from "./DelphiUserRow";
 import DelphiUserCreate from "./DelphiUserCreate";
 import { getUsername } from "./LoginCookie";
 
@@ -46,7 +48,7 @@ class DelphiUserList extends React.Component {
   formatData() {
     let username = getUsername();
     var userComponents = this.state.userArray.map(user => (
-      <DelphiUser key={user.username} user={user} username={username} />
+      <DelphiUserRow key={user.username} user={user} username={username} />
     ));
     this.setState({
       status: "running",
@@ -60,24 +62,16 @@ class DelphiUserList extends React.Component {
       <div>
         <p></p>
         <DelphiUserCreate />
-        <table>
+        <h3>Utenti</h3>
+        <Table striped responsive='sm'>
           <thead>
             <tr>
-              <td>
-                <h3>Utenti</h3>
-              </td>
-              <td>
-                <h3>&nbsp;</h3>
-              </td>
+              <th>Utente e ruolo</th>
+              <th>Azioni</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td> </td>
-            </tr>
-            {this.state.userComponents}
-          </tbody>
-        </table>
+          <tbody>{this.state.userComponents}</tbody>
+        </Table>
       </div>
     );
   }

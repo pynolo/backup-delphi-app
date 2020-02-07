@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import DelphiUserList from "../comp/DelphiUserList";
+import DelphiUserTable from "../comp/DelphiUserTable";
 import DelphiNavBar from "../comp/DelphiNavBar";
 
 import appConstants from "../etc/appConstants";
@@ -16,7 +16,7 @@ function UserListPage() {
         <Row>
           <Col md={1}>&nbsp;</Col>
           <Col md='auto'>
-            <DelphiUserList constants={appConstants} />
+            <DelphiUserTable constants={appConstants} />
           </Col>
         </Row>
       </Container>

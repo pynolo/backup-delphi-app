@@ -43,7 +43,7 @@ class DelphiTask extends React.Component {
             </span>
             {subtitle}
           </td>
-          <td>
+          <td className='align-middle'>
             <ExecutionPanel
               executable={this.props.task.executable}
               type={this.props.task.type}

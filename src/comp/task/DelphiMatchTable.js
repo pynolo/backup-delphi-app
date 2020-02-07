@@ -80,7 +80,7 @@ class DelphiMatchList extends React.Component {
     return (
       <div style={{ width: "100%" }}>
         <h3>Visualizzazione</h3>
-        <Table striped>
+        <Table striped responsive='sm'>
           <thead>
             <tr>
               <th>
