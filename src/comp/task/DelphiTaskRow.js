@@ -8,14 +8,13 @@ import appConstants from "../../etc/appConstants";
 class DelphiTask extends React.Component {
   render() {
     let title = this.props.task.name;
-    let subtitle = "";
+    let descr = "";
     if (this.props.task.description !== null) {
       if (this.props.task.description.length > 0) {
-        title = this.props.task.description;
-        subtitle = (
+        descr = (
           <span>
             <br />
-            {this.props.task.name}
+            {this.props.task.description}
           </span>
         );
       }
@@ -41,7 +40,7 @@ class DelphiTask extends React.Component {
               {title}
               {type}
             </span>
-            {subtitle}
+            {descr}
           </td>
           <td className='align-middle'>
             <ExecutionPanel
