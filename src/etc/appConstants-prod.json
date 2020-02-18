@@ -17,5 +17,7 @@
 	"apiBindUserTask": "/api/bindusertask",
 	"apiChangeUserTask": "/api/changeusertask",
 	"apiViewTaskByExecutable": "/api/viewtaskbyexecutable",
-	"apiChangeTaskDescription": "/api/changetaskdescription"
+	"apiChangeTaskDescription": "/api/changetaskdescription",
+	"apiFindSapFilteredMaster": "/api/findsapfilteredmaster",
+	"apiFindSapDetail": "/api/findsapdetail"
 }

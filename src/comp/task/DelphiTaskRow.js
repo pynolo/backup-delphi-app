@@ -5,7 +5,7 @@ import ExecutionPanel from "./ExecutionPanel";
 
 import appConstants from "../../etc/appConstants";
 
-class DelphiTask extends React.Component {
+class DelphiTaskRow extends React.Component {
   render() {
     let title = this.props.task.name;
     let descr = "";
@@ -57,4 +57,4 @@ class DelphiTask extends React.Component {
   }
 }
 
-export default DelphiTask;
+export default DelphiTaskRow;

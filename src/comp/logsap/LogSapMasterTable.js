@@ -1,15 +1,18 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-import DelphiTaskRow from "./DelphiTaskRow";
+import LogSapMasterRow from "./LogSapMasterRow";
 import { getUsername } from "../LoginCookie";
 import appConstants from "../../etc/appConstants";
 
-class DelphiTaskTable extends React.Component {
+class LogSapMasterTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      taskArray: null,
+      logArray: null,
+      startDatetime: props.startDatetime,
+      finishDatetime: props.finishDatetime,
+      maxResults: 100,
       username: null
     };
 
@@ -26,22 +29,25 @@ class DelphiTaskTable extends React.Component {
   loadData() {
     if (this.state.username !== null) {
       let taskEndpoint =
-        appConstants.apiEndpoint +
-        appConstants.apiViewAllTasks +
-        "/" +
-        this.state.username;
-      taskEndpoint = encodeURI(taskEndpoint);
+        appConstants.apiEndpoint + appConstants.apiFindSapFilteredMaster;
+      let bodyObj = {
+        startDatetime: this.state.startDatetime,
+        finishDatetime: this.state.finishDatetime,
+        maxResults: this.state.maxResults,
+        username: this.state.username
+      };
       fetch(taskEndpoint, {
-        method: "GET",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
-        }
+        },
+        body: JSON.stringify(bodyObj)
       })
         .then(res => res.json())
         .then(data => {
           this.setState({
-            taskArray: data
+            logArray: data
           });
         })
         .catch(console.log);
@@ -49,22 +55,19 @@ class DelphiTaskTable extends React.Component {
   }
 
   render() {
-    var hasTaskList = false;
-    if (this.state.taskArray !== null) {
-      if (this.state.taskArray.length > 0) {
-        hasTaskList = true;
+    var hasLogArray = false;
+    if (this.state.logArray !== null) {
+      if (this.state.logArray.length > 0) {
+        hasLogArray = true;
       }
     }
-    if (this.state.username !== null && hasTaskList) {
-      var taskComponents = this.state.taskArray.map(task => (
-        <DelphiTaskRow key={task.id} task={task} />
+    if (this.state.username !== null && hasLogArray) {
+      var logSapComponents = this.state.logArray.map(logSap => (
+        <LogSapMasterRow key={logSap.idSap} logSap={logSap} />
       ));
       return (
         <div>
-          <h3>
-            Elenco task ({appConstants.workspaceFilter.toLowerCase()}{" "}
-            {appConstants.environmentFilter.toLowerCase()})
-          </h3>
+          <h3>Log SAP</h3>
           <Table striped responsive='sm'>
             <thead>
               <tr>
@@ -72,25 +75,18 @@ class DelphiTaskTable extends React.Component {
                 <th>Stato</th>
               </tr>
             </thead>
-            <tbody>{taskComponents}</tbody>
+            <tbody>{logSapComponents}</tbody>
           </Table>
         </div>
       );
     } else
       return (
         <div>
-          <h3>Nessun task disponibile</h3>
-          <p>
-            Non sono stati ancora assegnati dei task a{" "}
-            <b>{this.state.username}</b>.
-          </p>
-          <p>
-            Chiedi agli amministratori di <b>Delphi</b> di configurare il tuo
-            account.
-          </p>
+          <p>&nbsp;</p>
+          <h4>Nessun log disponibile nel periodo scelto</h4>
         </div>
       );
   }
 }
 
-export default DelphiTaskTable;
+export default LogSapMasterTable;

@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import TaskListPage from "./pages/TaskListPage";
 import UserListPage from "./pages/UserListPage";
 import MatchListPage from "./pages/MatchListPage";
+import LogSapPage from "./pages/LogSapPage";
 import { getUsername } from "./comp/LoginCookie";
 
 import "./App.css";
@@ -79,6 +80,12 @@ class App extends React.Component {
             path='/matchlist'
             render={props => (
               <MatchListPage username={this.state.username} {...props} />
+            )}
+          />
+          <Route
+            path='/logsap'
+            render={props => (
+              <LogSapPage username={this.state.username} {...props} />
             )}
           />
           <Redirect from='/login' to='/tasklist' />

@@ -13,3 +13,5 @@ GET  /api/viewusertask/{username}/{executable}
 POST /api/changeusertask
 GET  /api/viewtaskbyexecutable/{executable}
 POST /api/changetaskdescription
+POST /api/findsapfilteredmaster
+POST /api/findsapdetail
