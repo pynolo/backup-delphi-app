@@ -1,5 +1,7 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import LogSapMasterRow from "./LogSapMasterRow";
 import { getUsername } from "../LoginCookie";
@@ -10,9 +12,9 @@ class LogSapMasterTable extends React.Component {
     super(props);
     this.state = {
       logArray: null,
-      startDatetime: props.startDatetime,
-      finishDatetime: props.finishDatetime,
-      maxResults: 100,
+      startIsoDt: props.startIsoDt,
+      finishIsoDt: props.finishIsoDt,
+      maxResults: props.maxResults,
       username: null
     };
 
@@ -26,13 +28,31 @@ class LogSapMasterTable extends React.Component {
     }); //asyncronous call to this.loadData()
   }
 
+  //Quando il padre aggiorna le props, questo statico restituisce
+  //un oggetto/argomento per setState()
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.startIsoDt !== prevState.startIsoDt ||
+      nextProps.finishIsoDt !== prevState.finishIsoDt ||
+      nextProps.maxResults !== prevState.maxResults
+    ) {
+      //console.log("getDerivedStateFromProps CHANGED");
+      return {
+        startIsoDt: nextProps.startIsoDt,
+        finishIsoDt: nextProps.finishIsoDt,
+        maxResults: nextProps.maxResults
+      };
+    }
+    return null;
+  }
+
   loadData() {
     if (this.state.username !== null) {
       let taskEndpoint =
         appConstants.apiEndpoint + appConstants.apiFindSapFilteredMaster;
       let bodyObj = {
-        startDatetime: this.state.startDatetime,
-        finishDatetime: this.state.finishDatetime,
+        startDatetime: this.state.startIsoDt,
+        finishDatetime: this.state.finishIsoDt,
         maxResults: this.state.maxResults,
         username: this.state.username
       };
@@ -61,22 +81,20 @@ class LogSapMasterTable extends React.Component {
         hasLogArray = true;
       }
     }
-    if (this.state.username !== null && hasLogArray) {
+    if (hasLogArray) {
       var logSapComponents = this.state.logArray.map(logSap => (
-        <LogSapMasterRow key={logSap.idSap} logSap={logSap} />
+        <LogSapMasterRow key={logSap.idLog} logSap={logSap} />
       ));
       return (
         <div>
           <h3>Log SAP</h3>
-          <Table striped responsive='sm'>
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Stato</th>
-              </tr>
-            </thead>
-            <tbody>{logSapComponents}</tbody>
-          </Table>
+          <Container>
+            <Row>
+              <Col md={2}>Log</Col>
+              <Col md={10}>Messaggio</Col>
+            </Row>
+            {logSapComponents}
+          </Container>
         </div>
       );
     } else

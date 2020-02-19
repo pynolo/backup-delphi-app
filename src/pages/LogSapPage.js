@@ -19,64 +19,78 @@ class LogSapPage extends React.Component {
     var now = new Date();
 
     this.state = {
-      startString: Moment(yesterday).format("MM/DD/YYYY HH:mm"),
-      finishString: Moment(now).format("MM/DD/YYYY HH:mm")
+      startDtString: Moment(yesterday).format("MM/DD/YYYY HH:mm"),
+      finishDtString: Moment(now).format("MM/DD/YYYY HH:mm"),
+      startIsoDt: yesterday.toISOString(),
+      finishIsoDt: now.toISOString()
     };
 
-    this.changeStart = this.changeStart.bind(this);
-    this.changeFinish = this.changeFinish.bind(this);
+    this.changeStartDt = this.changeStartDt.bind(this);
+    this.changeFinishDt = this.changeFinishDt.bind(this);
     this.createToolbar = this.createToolbar.bind(this);
+    this.submitFilterData = this.submitFilterData.bind(this);
   }
 
-  changeStart(event) {
+  changeStartDt(event) {
     this.setState({
-      startString: event.target.value
+      startDtString: event.target.value
     });
-    console.log("changestart");
   }
 
-  changeFinish(event) {
+  changeFinishDt(event) {
     this.setState({
-      finishString: event.target.value
+      finishDtString: event.target.value
     });
-    console.log("changefinish");
+  }
+
+  submitFilterData() {
+    var startDt = Moment(this.state.startDtString, "MM/DD/YYYY HH:mm");
+    var finishDt = Moment(this.state.finishDtString, "MM/DD/YYYY HH:mm");
+    this.setState({
+      startIsoDt: startDt.toISOString(),
+      finishIsoDt: finishDt.toISOString()
+    });
   }
 
   createToolbar() {
-    var start = this.state.startString;
-    var finish = this.state.finishString;
+    var start = this.state.startDtString;
+    var finish = this.state.finishDtString;
     return (
-      <Container>
-        <Row>
-          <Col md={1}>
-            <Form.Label>Inizio:</Form.Label>
-          </Col>
-          <Col md={4}>
-            <Form.Control
-              type='text'
-              name='startTime'
-              value={start}
-              size='md'
-              onChange={this.changeStart}
-            />
-          </Col>
-          <Col md={1}>
-            <Form.Label>Fine:</Form.Label>
-          </Col>
-          <Col md={4}>
-            <Form.Control
-              type='text'
-              name='finishTime'
-              value={finish}
-              size='md'
-              onChange={this.changeFinish}
-            />
-          </Col>
-          <Col md={2}>
-            <Button>Filtra</Button>
-          </Col>
-        </Row>
-      </Container>
+      <Form onSubmit={this.submitFilterData}>
+        <Container>
+          <Row>
+            <Col md={1}>
+              <Form.Label>Inizio:</Form.Label>
+            </Col>
+            <Col md={4}>
+              <Form.Control
+                type='text'
+                name='startDt'
+                value={start}
+                size='md'
+                onChange={this.changeStartDt}
+              />
+            </Col>
+            <Col md={1}>
+              <Form.Label>Fine:</Form.Label>
+            </Col>
+            <Col md={4}>
+              <Form.Control
+                type='text'
+                name='finishDt'
+                value={finish}
+                size='md'
+                onChange={this.changeFinishDt}
+              />
+            </Col>
+            <Col md={2}>
+              <Button variant='primary' type='submit'>
+                Filtra
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      </Form>
     );
   }
 
@@ -87,16 +101,12 @@ class LogSapPage extends React.Component {
         <DelphiNavBar />
         <p></p>
         <Container>
-          <Row>
-            <Col md={1}>&nbsp;</Col>
-            <Col md='auto'>
-              {toolbar}
-              <LogSapMasterTable
-                startDatetime={this.state.startDatetime}
-                finishDatetime={this.state.finishDatetime}
-              />
-            </Col>
-          </Row>
+          {toolbar}
+          <LogSapMasterTable
+            startIsoDt={this.state.startIsoDt}
+            finishIsoDt={this.state.finishIsoDt}
+            maxResults={100}
+          />
         </Container>
       </div>
     );
