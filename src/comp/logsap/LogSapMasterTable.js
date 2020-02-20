@@ -46,6 +46,19 @@ class LogSapMasterTable extends React.Component {
     return null;
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.match === null) {
+      this.loadData();
+    } else {
+      if (
+        prevState.startIsoDt !== this.state.startIsoDt ||
+        prevState.finishIsoDt !== this.state.finishIsoDt
+      ) {
+        this.loadData();
+      }
+    }
+  }
+
   loadData() {
     if (this.state.username !== null) {
       let taskEndpoint =

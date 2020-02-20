@@ -16,11 +16,13 @@ class LogSapPage extends React.Component {
     super(props);
     var yesterday = new Date();
     yesterday.setHours(yesterday.getHours() - 24);
+    var yesterString = Moment(yesterday).format("DD/MM/YYYY HH:mm");
     var now = new Date();
+    var nowString = Moment(now).format("DD/MM/YYYY HH:mm");
 
     this.state = {
-      startDtString: Moment(yesterday).format("MM/DD/YYYY HH:mm"),
-      finishDtString: Moment(now).format("MM/DD/YYYY HH:mm"),
+      startDtString: yesterString,
+      finishDtString: nowString,
       startIsoDt: yesterday.toISOString(),
       finishIsoDt: now.toISOString()
     };
@@ -44,8 +46,8 @@ class LogSapPage extends React.Component {
   }
 
   submitFilterData() {
-    var startDt = Moment(this.state.startDtString, "MM/DD/YYYY HH:mm");
-    var finishDt = Moment(this.state.finishDtString, "MM/DD/YYYY HH:mm");
+    var startDt = Moment(this.state.startDtString, "DD/MM/YYYY HH:mm");
+    var finishDt = Moment(this.state.finishDtString, "DD/MM/YYYY HH:mm");
     this.setState({
       startIsoDt: startDt.toISOString(),
       finishIsoDt: finishDt.toISOString()
@@ -56,41 +58,39 @@ class LogSapPage extends React.Component {
     var start = this.state.startDtString;
     var finish = this.state.finishDtString;
     return (
-      <Form onSubmit={this.submitFilterData}>
-        <Container>
-          <Row>
-            <Col md={1}>
-              <Form.Label>Inizio:</Form.Label>
-            </Col>
-            <Col md={4}>
-              <Form.Control
-                type='text'
-                name='startDt'
-                value={start}
-                size='md'
-                onChange={this.changeStartDt}
-              />
-            </Col>
-            <Col md={1}>
-              <Form.Label>Fine:</Form.Label>
-            </Col>
-            <Col md={4}>
-              <Form.Control
-                type='text'
-                name='finishDt'
-                value={finish}
-                size='md'
-                onChange={this.changeFinishDt}
-              />
-            </Col>
-            <Col md={2}>
-              <Button variant='primary' type='submit'>
-                Filtra
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      </Form>
+      <Container>
+        <Row>
+          <Col md={1}>
+            <Form.Label>Inizio:</Form.Label>
+          </Col>
+          <Col md={4}>
+            <Form.Control
+              type='text'
+              name='startDt'
+              value={start}
+              size='md'
+              onChange={this.changeStartDt}
+            />
+          </Col>
+          <Col md={1}>
+            <Form.Label>Fine:</Form.Label>
+          </Col>
+          <Col md={4}>
+            <Form.Control
+              type='text'
+              name='finishDt'
+              value={finish}
+              size='md'
+              onChange={this.changeFinishDt}
+            />
+          </Col>
+          <Col md={2}>
+            <Button variant='primary' onClick={this.submitFilterData}>
+              Filtra
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 

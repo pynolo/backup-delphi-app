@@ -55,7 +55,7 @@ class LogSapMasterRow extends React.Component {
       <div>
         <Row>
           <Col sm={2}>
-            {type}{" "}
+            {type}
             <Badge variant='secondary'>
               {Moment(time).format("DD/MM HH:mm:ss")}
             </Badge>
@@ -63,7 +63,9 @@ class LogSapMasterRow extends React.Component {
           <Col sm={10}>
             <small>
               <strong>{this.state.logSap.jobName}</strong>
-              {": "}
+              {" ["}
+              {this.state.logSap.zidRecord}
+              {"] "}
               {this.state.logSap.message}
             </small>
           </Col>

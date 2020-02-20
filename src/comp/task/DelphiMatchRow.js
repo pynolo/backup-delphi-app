@@ -83,7 +83,13 @@ class DelphiMatch extends React.Component {
         </tr>
       );
     } else {
-      row = <p style={{ display: "none" }}></p>;
+      row = (
+        <tr>
+          <td>
+            <p style={{ display: "none" }}></p>
+          </td>
+        </tr>
+      );
     }
     return row;
   }
