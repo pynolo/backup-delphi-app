@@ -24,7 +24,8 @@ class LogSapPage extends React.Component {
       startDtString: yesterString,
       finishDtString: nowString,
       startIsoDt: yesterday.toISOString(),
-      finishIsoDt: now.toISOString()
+      finishIsoDt: now.toISOString(),
+      maxResults: 1000
     };
 
     this.changeStartDt = this.changeStartDt.bind(this);
@@ -125,7 +126,7 @@ class LogSapPage extends React.Component {
           <LogSapMasterTable
             startIsoDt={this.state.startIsoDt}
             finishIsoDt={this.state.finishIsoDt}
-            maxResults={250}
+            maxResults={this.state.maxResults}
           />
         </Container>
       </div>
