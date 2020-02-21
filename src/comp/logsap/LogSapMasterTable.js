@@ -52,7 +52,8 @@ class LogSapMasterTable extends React.Component {
     } else {
       if (
         prevState.startIsoDt !== this.state.startIsoDt ||
-        prevState.finishIsoDt !== this.state.finishIsoDt
+        prevState.finishIsoDt !== this.state.finishIsoDt ||
+        prevState.maxResults !== this.state.maxResults
       ) {
         this.loadData();
       }
