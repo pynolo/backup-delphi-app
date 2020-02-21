@@ -17,6 +17,5 @@
 	"apiChangeUserTask": "/api/changeusertask",
 	"apiViewTaskByExecutable": "/api/viewtaskbyexecutable",
 	"apiChangeTaskDescription": "/api/changetaskdescription",
-	"apiFindSapFilteredMaster": "/api/findsapfilteredmaster",
-	"apiFindSapDetail": "/api/findsapdetail"
+	"apiFindSapHierarchicLog": "/api/findsaphierarchiclog"
 }

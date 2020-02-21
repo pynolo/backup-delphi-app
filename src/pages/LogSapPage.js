@@ -29,6 +29,7 @@ class LogSapPage extends React.Component {
 
     this.changeStartDt = this.changeStartDt.bind(this);
     this.changeFinishDt = this.changeFinishDt.bind(this);
+    this.changeMaxResults = this.changeMaxResults.bind(this);
     this.createToolbar = this.createToolbar.bind(this);
     this.submitFilterData = this.submitFilterData.bind(this);
   }
@@ -45,6 +46,12 @@ class LogSapPage extends React.Component {
     });
   }
 
+  changeMaxResults(event) {
+    this.setState({
+      maxResults: event.target.value
+    });
+  }
+
   submitFilterData() {
     var startDt = Moment(this.state.startDtString, "DD/MM/YYYY HH:mm");
     var finishDt = Moment(this.state.finishDtString, "DD/MM/YYYY HH:mm");
@@ -57,13 +64,14 @@ class LogSapPage extends React.Component {
   createToolbar() {
     var start = this.state.startDtString;
     var finish = this.state.finishDtString;
+    var max = this.state.maxResults;
     return (
       <Container>
         <Row>
           <Col md={1}>
             <Form.Label>Inizio:</Form.Label>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <Form.Control
               type='text'
               name='startDt'
@@ -75,7 +83,7 @@ class LogSapPage extends React.Component {
           <Col md={1}>
             <Form.Label>Fine:</Form.Label>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <Form.Control
               type='text'
               name='finishDt'
@@ -84,7 +92,19 @@ class LogSapPage extends React.Component {
               onChange={this.changeFinishDt}
             />
           </Col>
+          <Col md={1}>
+            <Form.Label>Limite:</Form.Label>
+          </Col>
           <Col md={2}>
+            <Form.Control
+              type='text'
+              name='maxResults'
+              value={max}
+              size='md'
+              onChange={this.changeMaxResults}
+            />
+          </Col>
+          <Col md={1}>
             <Button variant='primary' onClick={this.submitFilterData}>
               Filtra
             </Button>
@@ -105,7 +125,7 @@ class LogSapPage extends React.Component {
           <LogSapMasterTable
             startIsoDt={this.state.startIsoDt}
             finishIsoDt={this.state.finishIsoDt}
-            maxResults={100}
+            maxResults={250}
           />
         </Container>
       </div>

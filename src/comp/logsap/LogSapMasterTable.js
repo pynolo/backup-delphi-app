@@ -62,7 +62,7 @@ class LogSapMasterTable extends React.Component {
   loadData() {
     if (this.state.username !== null) {
       let taskEndpoint =
-        appConstants.apiEndpoint + appConstants.apiFindSapFilteredMaster;
+        appConstants.apiEndpoint + appConstants.apiFindSapHierarchicLog;
       let bodyObj = {
         startDatetime: this.state.startIsoDt,
         finishDatetime: this.state.finishIsoDt,
@@ -95,8 +95,8 @@ class LogSapMasterTable extends React.Component {
       }
     }
     if (hasLogArray) {
-      var logSapComponents = this.state.logArray.map(logSap => (
-        <LogSapMasterRow key={logSap.idLog} logSap={logSap} />
+      var masterComponents = this.state.logArray.map(master => (
+        <LogSapMasterRow key={master.idLog} master={master} />
       ));
       return (
         <div>
@@ -106,7 +106,7 @@ class LogSapMasterTable extends React.Component {
               <Col md={2}>Log</Col>
               <Col md={10}>Messaggio</Col>
             </Row>
-            {logSapComponents}
+            {masterComponents}
           </Container>
         </div>
       );
