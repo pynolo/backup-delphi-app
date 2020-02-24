@@ -50,8 +50,6 @@ class DelphiTaskRow extends React.Component {
           </td>
         </tr>
       );
-    } else {
-      row = <tr style={{ display: "none" }}></tr>;
     }
     return row;
   }
