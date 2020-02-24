@@ -29,14 +29,18 @@ class LogSapMasterRow extends React.Component {
       this.state.master.dtDataAcq,
       "YYYY-MM-DD'T'HH:mm:ss.SSS'Z'"
     );
+
     var caret = <i className='fa fa-caret-right' aria-hidden='true'></i>;
     if (this.state.showDetail)
       caret = <i className='fa fa-caret-down' aria-hidden='true'></i>;
+
     var detailStyle = { display: "none" };
     if (this.state.showDetail) detailStyle = { display: "block" };
+
     var detailComponents = this.state.master.detailList.map(detail => (
       <LogSapDetailRow key={detail.idLog} detail={detail} />
     ));
+
     var rowCount = "";
     if (this.state.master.rowCount > 1)
       rowCount = <Badge variant='dark'>×{this.state.master.rowCount}</Badge>;
@@ -93,10 +97,10 @@ class LogSapMasterRow extends React.Component {
                   <small>Record</small>
                 </th>
                 <th>
-                  <small>Param</small>
-                </th>
-                <th>
-                  <small>sData</small>
+                  <small>
+                    Param <i className='fa fa-file-text' aria-hidden='true'></i>{" "}
+                    sData
+                  </small>
                 </th>
               </tr>
             </thead>
