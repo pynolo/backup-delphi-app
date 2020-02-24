@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import LogSapMasterRow from "./LogSapMasterRow";
 import { getUsername } from "../LoginCookie";
 import appConstants from "../../etc/appConstants";
+import loadingIcon from "../../img/ajax-loader-big-flower-blue.gif";
 
 class LogSapMasterTable extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class LogSapMasterTable extends React.Component {
       startIsoDt: props.startIsoDt,
       finishIsoDt: props.finishIsoDt,
       maxResults: props.maxResults,
-      username: null
+      username: null,
+      isLoading: true
     };
 
     this.loadData = this.loadData.bind(this);
@@ -47,16 +49,15 @@ class LogSapMasterTable extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.match === null) {
+    if (
+      prevState.startIsoDt !== this.state.startIsoDt ||
+      prevState.finishIsoDt !== this.state.finishIsoDt ||
+      prevState.maxResults !== this.state.maxResults
+    ) {
+      this.setState({
+        isLoading: true
+      });
       this.loadData();
-    } else {
-      if (
-        prevState.startIsoDt !== this.state.startIsoDt ||
-        prevState.finishIsoDt !== this.state.finishIsoDt ||
-        prevState.maxResults !== this.state.maxResults
-      ) {
-        this.loadData();
-      }
     }
   }
 
@@ -81,7 +82,8 @@ class LogSapMasterTable extends React.Component {
         .then(res => res.json())
         .then(data => {
           this.setState({
-            logArray: data
+            logArray: data,
+            isLoading: false
           });
         })
         .catch(console.log);
@@ -89,6 +91,16 @@ class LogSapMasterTable extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <p>&nbsp;</p>
+          <h6>
+            <img src={loadingIcon} alt='' /> Caricamento...
+          </h6>
+        </div>
+      );
+    }
     var hasLogArray = false;
     if (this.state.logArray !== null) {
       if (this.state.logArray.length > 0) {

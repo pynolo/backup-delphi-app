@@ -21,8 +21,9 @@ class LogSapPage extends React.Component {
     var nowString = Moment(now).format("DD/MM/YYYY HH:mm");
 
     this.state = {
-      startDtString: yesterString,
-      finishDtString: nowString,
+      startDtForm: yesterString,
+      finishDtForm: nowString,
+      maxResultsForm: 1000,
       startIsoDt: yesterday.toISOString(),
       finishIsoDt: now.toISOString(),
       maxResults: 1000
@@ -37,35 +38,36 @@ class LogSapPage extends React.Component {
 
   changeStartDt(event) {
     this.setState({
-      startDtString: event.target.value
+      startDtForm: event.target.value
     });
   }
 
   changeFinishDt(event) {
     this.setState({
-      finishDtString: event.target.value
+      finishDtForm: event.target.value
     });
   }
 
   changeMaxResults(event) {
     this.setState({
-      maxResults: event.target.value
+      maxResultsForm: event.target.value
     });
   }
 
   submitFilterData() {
-    var startDt = Moment(this.state.startDtString, "DD/MM/YYYY HH:mm");
-    var finishDt = Moment(this.state.finishDtString, "DD/MM/YYYY HH:mm");
+    var startDt = Moment(this.state.startDtForm, "DD/MM/YYYY HH:mm");
+    var finishDt = Moment(this.state.finishDtForm, "DD/MM/YYYY HH:mm");
     this.setState({
       startIsoDt: startDt.toISOString(),
-      finishIsoDt: finishDt.toISOString()
+      finishIsoDt: finishDt.toISOString(),
+      maxResults: this.state.maxResultsForm
     });
   }
 
   createToolbar() {
-    var start = this.state.startDtString;
-    var finish = this.state.finishDtString;
-    var max = this.state.maxResults;
+    var start = this.state.startDtForm;
+    var finish = this.state.finishDtForm;
+    var max = this.state.maxResultsForm;
     return (
       <Container>
         <Row>
