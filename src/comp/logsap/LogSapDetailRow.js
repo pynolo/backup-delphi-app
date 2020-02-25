@@ -30,7 +30,9 @@ class LogSapDetailRow extends React.Component {
 
     var caret = "";
     var rowCount = "";
+    var toggleFunction = null;
     if (this.state.detail.rowCount > 1) {
+      toggleFunction = this.toggleSub;
       caret = <i className='fa fa-caret-right' aria-hidden='true'></i>;
       if (this.state.showSub)
         caret = <i className='fa fa-caret-down' aria-hidden='true'></i>;
@@ -39,7 +41,7 @@ class LogSapDetailRow extends React.Component {
     let row = (
       <tr>
         <td>
-          <div onClick={this.toggleSub}>
+          <div onClick={toggleFunction}>
             {caret} {rowCount}{" "}
             <small>
               <strong>{this.state.detail.zidRecord}</strong>
@@ -47,7 +49,7 @@ class LogSapDetailRow extends React.Component {
           </div>
         </td>
         <td>
-          <div onClick={this.toggleSub}>
+          <div onClick={toggleFunction}>
             <small>
               {this.state.detail.parameter}{" "}
               <i className='fa fa-file-text' aria-hidden='true'></i>{" "}
