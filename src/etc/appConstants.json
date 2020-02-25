@@ -2,6 +2,7 @@
 	"install": "DEV",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "TEST",
+	"logSapMaxResults": "400",
 	"apiEndpoint": "http://localhost:8080",
 	"apiAuthenticate": "/api/authenticate",
 	"apiViewAllTasks": "/api/viewalltasks",

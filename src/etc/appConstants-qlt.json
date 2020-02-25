@@ -2,6 +2,7 @@
 	"install": "quality",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "TEST",
+	"logSapMaxResults": "200",
 	"apiEndpoint": "http://delphi-qlt.intranet.giunti.it:81/delphi-server",
 	"apiAuthenticate": "/api/authenticate",
 	"apiViewAllTasks": "/api/viewalltasks",

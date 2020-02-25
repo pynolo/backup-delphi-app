@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 import LogSapMasterTable from "../comp/logsap/LogSapMasterTable";
 import DelphiNavBar from "../comp/DelphiNavBar";
 
-//import appConstants from "../etc/appConstants";
+import appConstants from "../etc/appConstants";
 
 class LogSapPage extends React.Component {
   constructor(props) {
@@ -19,14 +19,14 @@ class LogSapPage extends React.Component {
     var yesterString = Moment(yesterday).format("DD/MM/YYYY HH:mm");
     var now = new Date();
     var nowString = Moment(now).format("DD/MM/YYYY HH:mm");
-
+    var maxResults = appConstants.logSapMaxResults;
     this.state = {
       startDtForm: yesterString,
       finishDtForm: nowString,
-      maxResultsForm: 1000,
+      maxResultsForm: maxResults,
       startIsoDt: yesterday.toISOString(),
       finishIsoDt: now.toISOString(),
-      maxResults: 1000
+      maxResults: maxResults
     };
 
     this.changeStartDt = this.changeStartDt.bind(this);

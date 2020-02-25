@@ -2,6 +2,7 @@
 	"install": "",
 	"workspaceFilter": "SAP",
 	"environmentFilter": "PROD",
+	"logSapMaxResults": "200",
 	"apiEndpoint": "http://delphi.intranet.giunti.it:81/delphi-server",
 	"apiAuthenticate": "/api/authenticate",
 	"apiViewAllTasks": "/api/viewalltasks",
