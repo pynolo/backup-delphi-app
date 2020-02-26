@@ -65,7 +65,7 @@ class LogSapDetailRow extends React.Component {
                 <th>
                   <small>
                     Param <i className='fa fa-file-text' aria-hidden='true'></i>{" "}
-                    sData
+                    Dati inviati a SAP
                   </small>
                 </th>
               </tr>
