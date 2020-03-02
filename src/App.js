@@ -7,7 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import TaskListPage from "./pages/TaskListPage";
 import UserListPage from "./pages/UserListPage";
 import MatchListPage from "./pages/MatchListPage";
-import LogSapPage from "./pages/LogSapPage";
+import LogSapPage from "./comp/logsap/LogSapPage";
 import { getUsername } from "./comp/LoginCookie";
 
 import "./App.css";

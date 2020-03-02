@@ -6,10 +6,10 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import LogSapMasterTable from "../comp/logsap/LogSapMasterTable";
-import DelphiNavBar from "../comp/DelphiNavBar";
+import LogSapMasterTable from "./LogSapMasterTable";
+import DelphiNavBar from "../DelphiNavBar";
 
-import appConstants from "../etc/appConstants";
+import appConstants from "../../etc/appConstants";
 
 class LogSapPage extends React.Component {
   constructor(props) {
