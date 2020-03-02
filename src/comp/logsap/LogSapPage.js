@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import DelphiTaskSelect from "../task/DelphiTaskSelect";
 import LogSapMasterTable from "./LogSapMasterTable";
 import DelphiNavBar from "../DelphiNavBar";
 
@@ -98,13 +99,27 @@ class LogSapPage extends React.Component {
           <Col md={1}>
             <Form.Label>Limite:</Form.Label>
           </Col>
-          <Col md={2}>
+          <Col md={3}>
             <Form.Control
               type='text'
               name='maxResults'
               value={max}
               size='md'
               onChange={this.changeMaxResults}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={1}>
+            <Form.Label>Fine:</Form.Label>
+          </Col>
+          <Col md={10}>
+            <DelphiTaskSelect
+              type='text'
+              name='finishDt'
+              value={finish}
+              size='md'
+              onChange={this.changeFinishDt}
             />
           </Col>
           <Col md={1}>
