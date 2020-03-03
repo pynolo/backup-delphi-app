@@ -127,7 +127,7 @@ class LogSapMasterTable extends React.Component {
       return (
         <div>
           <p>&nbsp;</p>
-          <h4>Nessun log disponibile nel periodo scelto</h4>
+          <h6>Nessun log disponibile nel periodo scelto</h6>
         </div>
       );
   }

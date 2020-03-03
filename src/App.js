@@ -83,7 +83,7 @@ class App extends React.Component {
             )}
           />
           <Route
-            path='/logsap'
+            path='/logsap/:maxResults?/:startIsoDt?/:finishIsoDt?/:taskName?'
             render={props => (
               <LogSapPage username={this.state.username} {...props} />
             )}

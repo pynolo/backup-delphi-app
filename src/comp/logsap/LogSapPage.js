@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Moment from "moment";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -17,60 +18,106 @@ class LogSapPage extends React.Component {
     super(props);
     var yesterday = new Date();
     yesterday.setHours(yesterday.getHours() - 24);
-    var yesterString = Moment(yesterday).format("DD/MM/YYYY HH:mm");
+    //var startTime = Moment(yesterday).format("DD/MM/YYYY HH:mm");
+    var startIsoDt = yesterday.toISOString();
+    if (props.match.params.startIsoDt != null)
+      startIsoDt = props.match.params.startIsoDt;
+
     var now = new Date();
-    var nowString = Moment(now).format("DD/MM/YYYY HH:mm");
+    //var finishTime = Moment(now).format("DD/MM/YYYY HH:mm");
+    var finishIsoDt = now.toISOString();
+    if (props.match.params.finishIsoDt != null)
+      finishIsoDt = props.match.params.finishIsoDt;
+
     var maxResults = appConstants.logSapMaxResults;
+    if (props.match.params.maxResults != null)
+      maxResults = props.match.params.maxResults;
+
+    var taskName = "--";
+    if (props.match.params.taskName != null)
+      taskName = props.match.params.taskName;
+
     this.state = {
-      startDtForm: yesterString,
-      finishDtForm: nowString,
-      maxResultsForm: maxResults,
-      startIsoDt: yesterday.toISOString(),
-      finishIsoDt: now.toISOString(),
-      maxResults: maxResults
+      startIsoDt: startIsoDt,
+      finishIsoDt: finishIsoDt,
+      maxResults: maxResults,
+      taskName: taskName
     };
 
-    this.changeStartDt = this.changeStartDt.bind(this);
-    this.changeFinishDt = this.changeFinishDt.bind(this);
-    this.changeMaxResults = this.changeMaxResults.bind(this);
+    //this.changeStartDt = this.changeStartDt.bind(this);
+    //this.changeFinishDt = this.changeFinishDt.bind(this);
+    //this.changeMaxResults = this.changeMaxResults.bind(this);
     this.createToolbar = this.createToolbar.bind(this);
-    this.submitFilterData = this.submitFilterData.bind(this);
+    this.submitData = this.submitData.bind(this);
   }
 
-  changeStartDt(event) {
-    this.setState({
-      startDtForm: event.target.value
-    });
-  }
+  //changeStartDt(event) {
+  //  var startDt = Moment(event.target.value, "DD/MM/YYYY HH:mm");
+  //  this.setState({
+  //    startIsoDt: startDt.toISOString()
+  //  });
+  //}
 
-  changeFinishDt(event) {
-    this.setState({
-      finishDtForm: event.target.value
-    });
-  }
+  //changeFinishDt(event) {
+  //  var finishDt = Moment(event.target.value, "DD/MM/YYYY HH:mm");
+  //  this.setState({
+  //    finishIsoDt: finishDt.toISOString()
+  //  });
+  //}
 
-  changeMaxResults(event) {
-    this.setState({
-      maxResultsForm: event.target.value
-    });
-  }
+  //changeMaxResults(event) {
+  //  this.setState({
+  //    maxResultsForm: event.target.value
+  //  });
+  //}
 
-  submitFilterData() {
-    var startDt = Moment(this.state.startDtForm, "DD/MM/YYYY HH:mm");
-    var finishDt = Moment(this.state.finishDtForm, "DD/MM/YYYY HH:mm");
-    this.setState({
-      startIsoDt: startDt.toISOString(),
-      finishIsoDt: finishDt.toISOString(),
-      maxResults: this.state.maxResultsForm
-    });
+  submitData(event) {
+    //event.preventDefault();
+    var startDt = new Date();
+    if (event.target.elements.startDt != null)
+      startDt = Moment(event.target.elements.startDt.value, "DD/MM/YYYY HH:mm");
+    var finishDt = new Date();
+    if (event.target.elements.finishDt != null)
+      finishDt = Moment(
+        event.target.elements.finishDt.value,
+        "DD/MM/YYYY HH:mm"
+      );
+    var maxResults = 200;
+    if (event.target.elements.maxResults != null)
+      maxResults = event.target.elements.maxResults.value;
+    var taskName = "--";
+    if (event.target.elements.taskName != null)
+      taskName = event.target.elements.taskName.value;
+    var formUrl =
+      "/logsap/" +
+      maxResults +
+      "/" +
+      startDt.toISOString() +
+      "/" +
+      finishDt.toISOString();
+    if (taskName.length > 2) {
+      formUrl =
+        "/logsap/" +
+        maxResults +
+        "/" +
+        startDt.toISOString() +
+        "/" +
+        finishDt.toISOString() +
+        "/" +
+        taskName;
+    }
+    return <Redirect to={formUrl} />;
   }
 
   createToolbar() {
-    var start = this.state.startDtForm;
-    var finish = this.state.finishDtForm;
-    var max = this.state.maxResultsForm;
+    var startDt = Moment(this.state.startIsoDt, "YYYY-MM-DDTHH:mm:ss.sssZ");
+    var finishDt = Moment(this.state.finishIsoDt, "YYYY-MM-DDTHH:mm:ss.sssZ");
+    var start = Moment(startDt).format("DD/MM/YYYY HH:mm");
+    var finish = Moment(finishDt).format("DD/MM/YYYY HH:mm");
+    var max = this.state.maxResults;
+    var taskName = this.state.taskName;
     return (
-      <Container>
+      <Form onSubmit={this.submitData}>
         <Row>
           <Col md={1}>
             <Form.Label>Inizio:</Form.Label>
@@ -79,9 +126,8 @@ class LogSapPage extends React.Component {
             <Form.Control
               type='text'
               name='startDt'
-              value={start}
+              defaultValue={start}
               size='md'
-              onChange={this.changeStartDt}
             />
           </Col>
           <Col md={1}>
@@ -91,44 +137,41 @@ class LogSapPage extends React.Component {
             <Form.Control
               type='text'
               name='finishDt'
-              value={finish}
+              defaultValue={finish}
               size='md'
-              onChange={this.changeFinishDt}
             />
           </Col>
           <Col md={1}>
             <Form.Label>Limite:</Form.Label>
           </Col>
-          <Col md={3}>
+          <Col md={2}>
             <Form.Control
               type='text'
               name='maxResults'
-              value={max}
+              defaultValue={max}
               size='md'
-              onChange={this.changeMaxResults}
             />
           </Col>
         </Row>
         <Row>
           <Col md={1}>
-            <Form.Label>Fine:</Form.Label>
+            <Form.Label>Task:</Form.Label>
           </Col>
           <Col md={10}>
             <DelphiTaskSelect
               type='text'
-              name='finishDt'
-              value={finish}
+              name='taskName'
+              defaultValue={taskName}
               size='md'
-              onChange={this.changeFinishDt}
             />
           </Col>
           <Col md={1}>
-            <Button variant='primary' onClick={this.submitFilterData}>
+            <Button variant='primary' type='submit'>
               Filtra
             </Button>
           </Col>
         </Row>
-      </Container>
+      </Form>
     );
   }
 

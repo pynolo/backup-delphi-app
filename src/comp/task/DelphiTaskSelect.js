@@ -8,6 +8,7 @@ class DelphiTaskSelect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      controlName: props.name,
       taskArray: null,
       username: null
     };
@@ -59,14 +60,14 @@ class DelphiTaskSelect extends React.Component {
         <option key={task.id}>{task.name}</option>
       ));
       return (
-        <Form.Control as='select'>
+        <Form.Control as='select' name={this.state.controlName}>
           <option key='null'>--</option>
           {taskOptions}
         </Form.Control>
       );
     } else
       return (
-        <Form.Control as='select'>
+        <Form.Control as='select' name={this.state.controlName}>
           <option key='null'>--</option>
         </Form.Control>
       );
