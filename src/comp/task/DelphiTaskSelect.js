@@ -58,7 +58,9 @@ class DelphiTaskSelect extends React.Component {
     }
     if (this.state.username !== null && hasTaskList) {
       var taskOptions = this.state.taskArray.map(task => (
-        <option key={task.id}>{task.name}</option>
+        <option key={task.id} selected={task.name === this.state.defaultValue}>
+          {task.name}
+        </option>
       ));
       return (
         <Form.Control
