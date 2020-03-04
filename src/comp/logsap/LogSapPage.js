@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Moment from "moment";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -16,26 +15,31 @@ import appConstants from "../../etc/appConstants";
 class LogSapPage extends React.Component {
   constructor(props) {
     super(props);
+
     var yesterday = new Date();
     yesterday.setHours(yesterday.getHours() - 24);
     //var startTime = Moment(yesterday).format("DD/MM/YYYY HH:mm");
     var startIsoDt = yesterday.toISOString();
     if (props.match.params.startIsoDt != null)
       startIsoDt = props.match.params.startIsoDt;
+    console.log("startIsoDt: " + startIsoDt);
 
     var now = new Date();
     //var finishTime = Moment(now).format("DD/MM/YYYY HH:mm");
     var finishIsoDt = now.toISOString();
     if (props.match.params.finishIsoDt != null)
       finishIsoDt = props.match.params.finishIsoDt;
+    console.log("finishIsoDt: " + finishIsoDt);
 
     var maxResults = appConstants.logSapMaxResults;
     if (props.match.params.maxResults != null)
       maxResults = props.match.params.maxResults;
+    console.log("maxResults: " + maxResults);
 
     var taskName = "--";
     if (props.match.params.taskName != null)
       taskName = props.match.params.taskName;
+    console.log("taskName: " + taskName);
 
     this.state = {
       startIsoDt: startIsoDt,
@@ -44,35 +48,12 @@ class LogSapPage extends React.Component {
       taskName: taskName
     };
 
-    //this.changeStartDt = this.changeStartDt.bind(this);
-    //this.changeFinishDt = this.changeFinishDt.bind(this);
-    //this.changeMaxResults = this.changeMaxResults.bind(this);
     this.createToolbar = this.createToolbar.bind(this);
     this.submitData = this.submitData.bind(this);
   }
 
-  //changeStartDt(event) {
-  //  var startDt = Moment(event.target.value, "DD/MM/YYYY HH:mm");
-  //  this.setState({
-  //    startIsoDt: startDt.toISOString()
-  //  });
-  //}
-
-  //changeFinishDt(event) {
-  //  var finishDt = Moment(event.target.value, "DD/MM/YYYY HH:mm");
-  //  this.setState({
-  //    finishIsoDt: finishDt.toISOString()
-  //  });
-  //}
-
-  //changeMaxResults(event) {
-  //  this.setState({
-  //    maxResultsForm: event.target.value
-  //  });
-  //}
-
   submitData(event) {
-    //event.preventDefault();
+    event.preventDefault();
     var startDt = new Date();
     if (event.target.elements.startDt != null)
       startDt = Moment(event.target.elements.startDt.value, "DD/MM/YYYY HH:mm");
@@ -106,7 +87,10 @@ class LogSapPage extends React.Component {
         "/" +
         taskName;
     }
-    return <Redirect to={formUrl} />;
+    console.log("url: " + formUrl);
+    window.location = formUrl;
+    console.log("changed location");
+    //return <Redirect to={formUrl} />;
   }
 
   createToolbar() {
@@ -187,6 +171,7 @@ class LogSapPage extends React.Component {
             startIsoDt={this.state.startIsoDt}
             finishIsoDt={this.state.finishIsoDt}
             maxResults={this.state.maxResults}
+            taskName={this.state.taskName}
           />
         </Container>
       </div>

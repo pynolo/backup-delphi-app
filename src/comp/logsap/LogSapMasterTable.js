@@ -16,6 +16,7 @@ class LogSapMasterTable extends React.Component {
       startIsoDt: props.startIsoDt,
       finishIsoDt: props.finishIsoDt,
       maxResults: props.maxResults,
+      taskName: props.taskName,
       username: null,
       isLoading: true
     };
@@ -36,13 +37,15 @@ class LogSapMasterTable extends React.Component {
     if (
       nextProps.startIsoDt !== prevState.startIsoDt ||
       nextProps.finishIsoDt !== prevState.finishIsoDt ||
-      nextProps.maxResults !== prevState.maxResults
+      nextProps.maxResults !== prevState.maxResults ||
+      nextProps.taskName !== prevState.taskName
     ) {
       //console.log("getDerivedStateFromProps CHANGED");
       return {
         startIsoDt: nextProps.startIsoDt,
         finishIsoDt: nextProps.finishIsoDt,
-        maxResults: nextProps.maxResults
+        maxResults: nextProps.maxResults,
+        taskName: nextProps.taskName
       };
     }
     return null;
@@ -52,7 +55,8 @@ class LogSapMasterTable extends React.Component {
     if (
       prevState.startIsoDt !== this.state.startIsoDt ||
       prevState.finishIsoDt !== this.state.finishIsoDt ||
-      prevState.maxResults !== this.state.maxResults
+      prevState.maxResults !== this.state.maxResults ||
+      prevState.taskName !== this.state.taskName
     ) {
       this.setState({
         isLoading: true
@@ -69,6 +73,7 @@ class LogSapMasterTable extends React.Component {
         startDatetime: this.state.startIsoDt,
         finishDatetime: this.state.finishIsoDt,
         maxResults: this.state.maxResults,
+        taskName: this.state.taskName,
         username: this.state.username
       };
       fetch(taskEndpoint, {
