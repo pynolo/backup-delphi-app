@@ -22,24 +22,20 @@ class LogSapPage extends React.Component {
     var startIsoDt = yesterday.toISOString();
     if (props.match.params.startIsoDt != null)
       startIsoDt = props.match.params.startIsoDt;
-    console.log("startIsoDt: " + startIsoDt);
 
     var now = new Date();
     //var finishTime = Moment(now).format("DD/MM/YYYY HH:mm");
     var finishIsoDt = now.toISOString();
     if (props.match.params.finishIsoDt != null)
       finishIsoDt = props.match.params.finishIsoDt;
-    console.log("finishIsoDt: " + finishIsoDt);
 
     var maxResults = appConstants.logSapMaxResults;
     if (props.match.params.maxResults != null)
       maxResults = props.match.params.maxResults;
-    console.log("maxResults: " + maxResults);
 
     var taskName = "--";
     if (props.match.params.taskName != null)
       taskName = props.match.params.taskName;
-    console.log("taskName: " + taskName);
 
     this.state = {
       startIsoDt: startIsoDt,
@@ -87,10 +83,7 @@ class LogSapPage extends React.Component {
         "/" +
         taskName;
     }
-    console.log("url: " + formUrl);
     window.location = formUrl;
-    console.log("changed location");
-    //return <Redirect to={formUrl} />;
   }
 
   createToolbar() {

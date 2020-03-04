@@ -9,12 +9,13 @@ class DelphiTaskSelect extends React.Component {
     super(props);
     this.state = {
       controlName: props.name,
-      defaultValue: props.defaultValue,
+      selectedValue: props.defaultValue,
       taskArray: null,
       username: null
     };
 
     this.loadData = this.loadData.bind(this);
+    this.changeValue = this.changeValue.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +50,12 @@ class DelphiTaskSelect extends React.Component {
     }
   }
 
+  changeValue(event) {
+    this.setState({
+      selectedValue: event.target.value
+    });
+  }
+
   render() {
     var hasTaskList = false;
     if (this.state.taskArray !== null) {
@@ -57,18 +64,20 @@ class DelphiTaskSelect extends React.Component {
       }
     }
     if (this.state.username !== null && hasTaskList) {
-      var taskOptions = this.state.taskArray.map(task => (
-        <option key={task.id} selected={task.name === this.state.defaultValue}>
-          {task.name}
-        </option>
-      ));
       return (
         <Form.Control
           as='select'
           name={this.state.controlName}
-          defaultValue={this.state.defaultValue}>
-          <option key='null'>--</option>
-          {taskOptions}
+          value={this.state.selectedValue}
+          onChange={this.changeValue}>
+          <option key='--' value='--'>
+            --
+          </option>
+          {this.state.taskArray.map(task => (
+            <option key={task.id} value={task.name}>
+              {task.name}
+            </option>
+          ))}
         </Form.Control>
       );
     } else
