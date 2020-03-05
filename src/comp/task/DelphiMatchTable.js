@@ -87,7 +87,7 @@ class DelphiMatchList extends React.Component {
           <thead>
             <tr>
               <th>
-                <i class='fa fa-eye' aria-hidden='true'></i>
+                <i className='fa fa-eye' aria-hidden='true'></i>
               </th>
               <th>Task</th>
               <th>Descrizione</th>
