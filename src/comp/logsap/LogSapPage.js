@@ -95,7 +95,7 @@ class LogSapPage extends React.Component {
     var taskName = this.state.taskName;
     return (
       <Form onSubmit={this.submitData}>
-        <Row>
+        <Row className='formRow'>
           <Col md={1}>
             <Form.Label>Inizio:</Form.Label>
           </Col>
@@ -130,7 +130,7 @@ class LogSapPage extends React.Component {
             />
           </Col>
         </Row>
-        <Row>
+        <Row className='formRow'>
           <Col md={1}>
             <Form.Label>Task:</Form.Label>
           </Col>
