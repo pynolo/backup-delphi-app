@@ -96,31 +96,33 @@ class LogSapPage extends React.Component {
     return (
       <Form onSubmit={this.submitData}>
         <Row className='formRow'>
-          <Col md={1}>
-            <Form.Label>Inizio:</Form.Label>
-          </Col>
+          <Form.Label column md={1}>
+            Inizio:
+          </Form.Label>
           <Col md={3}>
             <Form.Control
               type='text'
               name='startDt'
               defaultValue={start}
               size='md'
+              placeholder='gg/mm/aaaa hh:mm'
             />
           </Col>
-          <Col md={1}>
-            <Form.Label>Fine:</Form.Label>
-          </Col>
+          <Form.Label column md={1}>
+            Fine:
+          </Form.Label>
           <Col md={3}>
             <Form.Control
               type='text'
               name='finishDt'
               defaultValue={finish}
               size='md'
+              placeholder='gg/mm/aaaa hh:mm'
             />
           </Col>
-          <Col md={1}>
-            <Form.Label>Limite:</Form.Label>
-          </Col>
+          <Form.Label column md={1}>
+            Limite:
+          </Form.Label>
           <Col md={2}>
             <Form.Control
               type='text'
@@ -131,9 +133,9 @@ class LogSapPage extends React.Component {
           </Col>
         </Row>
         <Row className='formRow'>
-          <Col md={1}>
-            <Form.Label>Task:</Form.Label>
-          </Col>
+          <Form.Label column md={1}>
+            Task:
+          </Form.Label>
           <Col md={10}>
             <DelphiTaskSelect
               type='text'
